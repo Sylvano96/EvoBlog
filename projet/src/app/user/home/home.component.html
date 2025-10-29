@@ -2,27 +2,53 @@
 
 <div class="home-container container">
   <div class="intro-section">
+    
+    <div class="text-content">
+      <h1>Bienvenue 👋</h1>
+      <p class="subtitle">
+        Plonge au cœur de l’innovation technologique et partage tes idées avec une communauté passionnée.
+      </p>
+      <p class="description">
+        Articles, projets, inspirations... Découvre, crée, et connecte-toi avec le monde du numérique !
+      </p>
+
+      <!-- <a class="btn btn-primary mt-3" routerLink="/signUp">
+        Rejoindre 🚀
+      </a>
+      <p class="small-note mt-2">
+        Déjà membre ?
+        <a routerLink="/login" class="login-link">Se connecter</a>
+      </p> -->
+    </div>
+
     <div class="image-wrapper">
       <img [src]="img" alt="Tech image" />
     </div>
 
-    <div class="text-content">
-      <h1>Bienvenue 😊👋</h1>
-      <p class="subtitle">
-        Bienvenue sur notre plateforme, cher passionné de technologie.  
-        Découvrons ensemble les innovations qui transforment notre monde...
-      </p>
-
-      <!-- <p class="description">
-        Pour publier vos propres articles, rejoignez notre communauté !
-      </p>
-
-      <a class="btn btn-primary mt-3" routerLink="/signUp">
-        S'inscrire
-      </a> -->
-    </div>
   </div>
 </div>
+
+<section class="features-section container">
+  <h2 class="text-center mb-5">Pourquoi nous rejoindre ?</h2>
+  <div class="features-list">
+
+    <div class="feature-card">
+      <h3>🧠 Apprendre</h3>
+      <p>Explore les dernières nouveautés tech et améliore tes compétences.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>💡 Partager</h3>
+      <p>Publie tes projets, exprime tes idées, inspire la communauté.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>🤝 Connecter</h3>
+      <p>Rencontre des passionnés comme toi et collabore sur des projets innovants.</p>
+    </div>
+
+  </div>
+</section>
 
 <app-posts></app-posts>
 <app-footer></app-footer>

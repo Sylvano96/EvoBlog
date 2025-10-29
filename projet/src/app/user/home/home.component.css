@@ -1,13 +1,55 @@
 .home-container {
-  padding: 40px 0 90px 0;
+  padding: 40px 0 60px 0;
 }
 
+/* Introduction */
 .intro-section {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 30px;
+  gap: 35px;
   flex-wrap: wrap;
+  padding: 20px 0;
+}
+
+.text-content {
+  max-width: 500px;
+  animation: slideUp 1s ease forwards;
+}
+
+.text-content h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  font-family: "Gill Sans", sans-serif;
+}
+
+.description {
+  margin-top: 12px;
+  color: #666;
+  line-height: 1.5;
+}
+
+.btn {
+  width: 160px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 50px;
+}
+
+.login-link {
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.small-note {
+  font-size: 0.9rem;
+  margin-top: 5px;
 }
 
 .image-wrapper {
@@ -15,67 +57,82 @@
   height: 450px;
   display: flex;
   justify-content: center;
-
-  img {
-    width: 100%;
-    height: 100%;
-    border-radius: 8px;
-    object-fit: cover;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
-    animation: fadeIn 1s ease-in-out;
-  }
 }
 
-.text-content {
-  max-width: 500px;
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.35);
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* ✅ Features Section */
+.features-section {
+  padding: 60px 0;
+}
+
+.features-section h2 {
+  font-size: 2.1rem;
+  font-weight: 700;
+}
+
+.features-list {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.feature-card {
+  background: #ffffff10;
+  backdrop-filter: blur(6px);
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  width: 280px;
+  padding: 25px 18px;
   text-align: center;
-
-  h1 {
-    font-family: "Segoe UI", sans-serif;
-    font-size: 2.3rem;
-    font-weight: 600;
-    margin-bottom: 10px;
-  }
-
-  .subtitle {
-    font-size: 1.2rem;
-    line-height: 1.5;
-    font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
-  }
-
-  .description {
-    font-size: 1rem;
-    margin-top: 10px;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-
-  .btn {
-    width: 140px;
-    font-size: 1rem;
-  }
+  transition: transform .3s ease, box-shadow .3s ease;
 }
 
-/* Animation */
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.feature-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+/* ✅ Animations */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(1.05);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(1.05); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 /* ✅ Responsive */
 @media (max-width: 768px) {
   .intro-section {
-    flex-direction: column;
     text-align: center;
   }
 
   .image-wrapper {
     width: 100%;
-    height: 300px;
+    height: 320px;
+  }
+
+  .text-content h1 {
+    font-size: 2.1rem;
+  }
+
+  .features-list {
+    gap: 15px;
   }
 }
