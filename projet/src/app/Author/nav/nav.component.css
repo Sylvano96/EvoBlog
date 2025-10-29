@@ -1,4 +1,61 @@
-nav ul li{
-    display: inline;
-    margin: 0 10px;
+/* Navigation Modernisée */
+.custom-navbar {
+  background: #ffffff;
+  padding: 10px 20px;
+  transition: 0.3s ease;
+}
+
+.custom-navbar .blog-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: "Poppins", sans-serif;
+  color: #007bff !important;
+  cursor: pointer;
+}
+
+.custom-navbar .nav-link {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333 !important;
+  background: transparent;
+  border: none;
+  padding: 8px 16px;
+  transition: 0.3s ease;
+  position: relative;
+}
+
+/* ✅ Effet hover animé */
+.custom-navbar .nav-link:hover,
+.custom-navbar .nav-link.active {
+  color: #007bff !important;
+}
+
+.custom-navbar .nav-link::after {
+  content: "";
+  width: 0;
+  height: 2px;
+  background: #007bff;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transition: 0.3s ease-in-out;
+}
+
+.custom-navbar .nav-link:hover::after,
+.custom-navbar .nav-link.active::after {
+  width: 100%;
+  left: 0;
+}
+
+/* ✅ Responsive */
+@media (max-width: 768px) {
+  .navbar-nav {
+    text-align: center;
+    padding-top: 12px;
+  }
+
+  .custom-navbar .nav-link {
+    width: 100%;
+    padding: 12px;
+  }
 }

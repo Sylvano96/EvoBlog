@@ -1,16 +1,95 @@
-.card{
-    border-radius: 5px; 
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.437); 
-    padding: 10px;
+.post-create {
+  padding: 50px 0;
 }
-.cont-del{
-    position:fixed;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.486);
-    top: 0;
-    left: 0;
-    display: flex; 
-    justify-content: center; 
-    align-items: center;
+
+.page-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.7rem;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+.post-layout {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.modern-card {
+  width: 100%;
+  max-width: 500px;
+  background: #ffffff;
+  border: none;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  transition: 0.3s ease;
+}
+
+.modern-card:hover {
+  transform: translateY(-3px);
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.error {
+  color: #ff4d4d;
+  font-size: 0.9rem;
+}
+
+.form-control,
+.form-select {
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.image-preview img {
+  max-width: 100%;
+  max-height: 350px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin: 10px 0;
+}
+
+.preview-block {
+  background: #f8f9fa;
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.edit-icon {
+  font-size: 18px;
+  cursor: pointer;
+  color: #007bff;
+  transition: 0.3s;
+}
+
+.edit-icon:hover {
+  color: #0056b3;
+}
+
+.success-popup {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  padding: 10px 18px;
+  font-size: 1rem;
+  animation: fadeOut 2.5s forwards;
+}
+
+/* Animation disparition */
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(10px); }
 }

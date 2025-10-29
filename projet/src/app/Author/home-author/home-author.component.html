@@ -1,49 +1,54 @@
-<div>
-    <app-nav></app-nav>
-</div>
-<div class="container">
-    <!-- <h3 style="font-family: cursive; text-align: right; margin-top: 15px;">Bienvenue cher auteur, Elias Sylvano</h3>-->
-    <div class="cont-1"> 
-        <div class="cont-1-1">
-            <img src={{img}} alt="">
-        </div>
-        <div>
-            <p class="my-4" style="font-size: 20px; font-family: cursive; word-wrap: break-word; text-align: center;">
-                Ecrire, c'est partager une part de soi avec le monde. Le blogging, c'est transformer
-                des idées en impact et des histoires en connexions
-            </p>
-            <div style="display: flex; justify-content: center;">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Résumer de votre contenu
-                </button>
-            </div>
-        </div>
-    </div>
-    
-</div>
+<app-nav></app-nav>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="container my-3" >
-                    <div class="cont-11" >
-                        <div class="card-1">
-                            <p class="ph">TOTAL DES PUBLIES</p>
-                            <p class="nb">200</p>
-                        </div>
-                        <div class="card-2">
-                            <p class="ph">TOTAL DES NON PUBLIES</p>
-                            <p class="nb">123</p>
-                        </div>
-                    </div>
-                    <div class="container my-2" style="display: flex; justify-content: center;">
-                        <div class="chart-container">
-                            <canvas #chartCanvas></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<section class="author-hero container">
+  <div class="author-profile">
+    <div class="profile-image">
+      <img [src]="img" alt="Auteur">
     </div>
+
+    <div class="profile-content">
+      <h2>Bienvenue, Cher Auteur ✍️</h2>
+      <p class="quote">
+        “Écrire, c’est partager une part de soi avec le monde. 
+        Le blogging transforme des idées en impact et des histoires en connexions.”
+      </p>
+
+      <button class="btn btn-primary open-stats"
+              data-bs-toggle="modal" 
+              data-bs-target="#exampleModal">
+        Voir mes statistiques 📊
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ✅ Modal amélioré -->
+<div class="modal fade" id="exampleModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Résumé de vos publications</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="stats-cards">
+          <div class="stat-card stat-published">
+            <span class="label">Publiés ✅</span>
+            <span class="value">200</span>
+          </div>
+          <div class="stat-card stat-unpublished">
+            <span class="label">Non publiés 🕓</span>
+            <span class="value">123</span>
+          </div>
+        </div>
+
+        <div class="chart-container">
+          <canvas #chartCanvas></canvas>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>

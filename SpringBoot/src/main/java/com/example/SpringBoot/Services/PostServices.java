@@ -45,6 +45,7 @@ public class PostServices {
 
             newImageFileName = uuidStr+imageName;
             File imageFile = new File(imagePath);
+            System.out.println("Le file ato raha misy : " + imageFile);
 
             if (imageFile.exists()){
                 Path lastFilePath = Paths.get(uploadDir + imageName);

@@ -1,93 +1,88 @@
-
 <app-nav></app-nav>
-<div>
-    <h2 class="text-center my-4" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">NOUVEAU POST</h2>
-    <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px;">
-        <div style="width: 100%; max-width: 600px;" class="card">
-            <section>
-                <form [formGroup]="title">
-                    <label for="">Titre du post</label>
-                    <input type="text" name="title" id="" class="form-control" formControlName="title">
-                    <div *ngIf="title.get('title')?.touched && title.get('title')?.hasError('required')" class="text-center">
-                        <p style="color: red;">Champ titre vide</p>
-                    </div> 
-                    <div *ngIf="formulaire.get('title')?.touched && formulaire.get('title')?.hasError('maxlength')" class="text-center">
-                        <p class="text-center" style="color: red;">Le titre ne doit pas dépasser 70 caractères</p>
-                    </div>
-                    <button class="btn btn-primary m-2" (click)="submitAddUp()">AJOUTER/MODIFIER</button>
-                </form>
-            </section>
-            <label for="" class="my-1">Catégorie </label>
-            <Select class="form-control my-2" (change)="modifyCat($event)">
-                <option value="Actualités technologique">Actualités Tech</option>
-                <option value="Intelligence Artificielle">Intelligence Artificielle</option>
-                <option value="Technologie Mobile">Technologie Mobile</option>
-                <option value="Innovations Emergantes">Innovations Emergantes</option>
-                <option value="Gadgets et Wearables">Gadgets et Wearables</option>
-                <option value="Technologie et Environnement">Technologie et Environnement</option>
-                <option value="Sécurité Informatique">Sécurité Informatique</option>
-                <option value="Technologie et Santé">Technologie et Santé</option>
-                <option value="Technologie et Société">Technologie et Société</option>
-                <option value="Futur et Futurologie">Futur et Futurologie</option>
-            </Select>
-            <section>
-                <form  [formGroup]="formulaire">
-                    <label for="">Image</label>
-                    <input type="file" class="form-control" (change)="onFileSelected($event)">
-                    <div *ngIf="errorMessage">
-                        <p style="color: red;">{{errorMessage}}</p>
-                    </div>
-                    <label for="">Titre de paragraphe</label>
-                    <input type="text" class="form-control" name="titlePara" formControlName="titlePara">
-                    <div *ngIf="formulaire.get('titlePara')?.touched && formulaire.get('titlePara')?.hasError('required')" class="text-center">
-                        <p style="color: red;">Le titre de paragraphe est vide</p>
-                    </div> 
-                    <label for="">Déscription</label>
-                    <textarea name="content" formControlName="content" id="" class="form-control"></textarea>
-                    <div *ngIf="formulaire.get('content')?.touched && formulaire.get('content')?.hasError('required')" class="text-center">
-                        <p style="color: red;">Déscription vide</p>
-                    </div> 
-                    <button class="btn btn-primary my-2" (click)="submit()">AJOUTER</button>
-                </form>
-            </section>
-            <!-- <img src="http://localhost:8080/images/5e8d61c2d9eaa9ce84188d91568fffa4.jpg" alt=""> -->
-        </div>
-        
-        <div class="card"style="max-width: 600px; width: 100%; overflow-y: auto; height: 100%; max-height: 550px;">
-            <div>
-                <div><h4 class="text-center" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">{{titleDis}}</h4></div>
-                <p class="text-center">Catégorie : {{categorie}}</p>
-                <div>
-                    <div *ngIf="erreurPost">
-                        <p style="color: red; text-align: center;">Titre du post ou titre de paragraphe ou déscription non définie</p>
-                    </div>
-                    <div style="display: flex; justify-content: center; margin: 10px 0;">
-                        <img [src]="imagePreview" *ngIf="imagePreview" alt="" style="max-width: 400px; width: 100%; border-radius: 5px;">
-                    </div>
-                    <div *ngFor="let item of data">
-                        <div class="form-control my-2">
-                            <div style="display: flex; justify-content: space-between;" class="my-1">
-                                <h6 >{{item.titlePara}}</h6>
-                                <div>
-                                    <i class="fas fa-pen-to-square mx-1" style="font-size: 20px; cursor: pointer;" (click)="update(item.id)"></i>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="deletePara(item.id)"></button>
-                                </div>
-                            </div>
-                            <div style="word-wrap: break-word;">
-                                <p>{{item.content}}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <button class="btn btn-primary" (click)="poster()">PUBLIER</button>
-                    <button class='btn btn-success mx-2' (click)="nonPoster()">SAUVEGARDER (Non publié)</button>
-                </div>
-            </div>
-        </div>
+
+<div class="post-create container">
+
+  <h2 class="page-title text-center">✍️ Créer un nouveau post</h2>
+
+  <div class="post-layout">
+
+    <!-- ✅ FORMULAIRE -->
+    <div class="card modern-card">
+      <form [formGroup]="title">
+        <label>Titre du post</label>
+        <input type="text" class="form-control" formControlName="title" placeholder="Entrez le titre...">
+        <small class="error" *ngIf="title.get('title')?.touched && title.get('title')?.hasError('required')">
+          Le titre est requis.
+        </small>
+        <button class="btn btn-primary w-100 mt-3" (click)="submitAddUp()">AJOUTER/MODIFIER</button>
+      </form>
+
+      <div class="form-group mt-3">
+        <label>Catégorie</label>
+        <select class="form-select" (change)="modifyCat($event)">
+          <option disabled selected>Choisir une catégorie...</option>
+          <option value="Actualités technologique">Actualités Tech</option>
+          <option value="Intelligence Artificielle">Intelligence Artificielle</option>
+          <option value="Technologie Mobile">Technologie Mobile</option>
+          <option value="Innovations Emergantes">Innovations Emergantes</option>
+          <option value="Gadgets et Wearables">Gadgets et Wearables</option>
+          <option value="Sécurité Informatique">Sécurité Informatique</option>
+        </select>
+      </div>
+
+      <form [formGroup]="formulaire" class="mt-3">
+        <label>Image</label>
+        <input type="file" class="form-control" (change)="onFileSelected($event)">
+        <small class="error" *ngIf="errorMessage">{{ errorMessage }}</small>
+
+        <label class="mt-3">Titre du paragraphe</label>
+        <input type="text" class="form-control" formControlName="titlePara" placeholder="Sous-titre">
+        <small class="error" *ngIf="formulaire.get('titlePara')?.touched && formulaire.get('titlePara')?.hasError('required')">
+          Le titre du paragraphe est requis.
+        </small>
+
+        <label class="mt-3">Contenu</label>
+        <textarea rows="4" class="form-control" formControlName="content"
+        placeholder="Décrivez votre idée..."></textarea>
+        <small class="error" *ngIf="formulaire.get('content')?.touched && formulaire.get('content')?.hasError('required')">
+          La description est requise.
+        </small>
+
+        <button class="btn btn-primary w-100 mt-3" (click)="submit()">Ajouter le paragraphe</button>
+      </form>
     </div>
+
+    <!-- ✅ APERCU DU POST -->
+    <div class="card modern-card preview-card">
+      <h4 class="text-center">{{ titleDis || "Aperçu du post" }}</h4>
+      <p class="category text-center" *ngIf="categorie">Catégorie : {{ categorie }}</p>
+
+      <div class="image-preview" *ngIf="imagePreview">
+        <img [src]="imagePreview" alt="Aperçu">
+      </div>
+
+      <div *ngFor="let item of data" class="preview-block mt-2">
+        <div class="preview-header">
+          <h6>{{ item.titlePara }}</h6>
+          <div class="actions">
+            <i class="fas fa-pen-to-square edit-icon" (click)="update(item.id)"></i>
+            <button class="btn-close" (click)="deletePara(item.id)"></button>
+          </div>
+        </div>
+        <p>{{ item.content }}</p>
+      </div>
+
+      <div class="action-buttons mt-3 text-center">
+        <button class="btn btn-primary mx-1" (click)="poster()">Publier</button>
+        <button class="btn btn-success mx-1" (click)="nonPoster()">Sauvegarder</button>
+      </div>
+
+      <p *ngIf="erreurPost" class="error text-center mt-3">Informations manquantes !</p>
+    </div>
+
+  </div>
 </div>
 
-<div *ngIf="addSuccess" class="alert alert-success text-center" style="position:fixed; bottom: 10px; right:10px;">
-    Ajout réussi <i class="fas fa-check"></i>
+<div *ngIf="addSuccess" class="alert alert-success success-popup">
+  ✅ Ajout réussi !
 </div>
