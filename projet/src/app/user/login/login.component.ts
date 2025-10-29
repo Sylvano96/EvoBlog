@@ -32,7 +32,7 @@ export class LoginComponent {
   submit(){
     if(this.formulaire.valid){
       this.serviceUserService.loginUser(this.formulaire.value).subscribe((response)=>{
-        console.log(Object.values(response)[1])
+        console.log("Output : ",response)
 
         const x = Object.values(response)[0].split('-')
         
@@ -40,11 +40,15 @@ export class LoginComponent {
         this.AuthService.login(Object.values(response)[0])
 
         this.status = Object.values(response)[1]
+        if(this.status == "admin"){
+          this.GoToAnotherPageService.goToAnotherPage("admin")
+        }else if(this.status == "author"){
+          this.GoToAnotherPageService.goToAnotherPage("author")
+        }
       }, (error)=>{
         console.log("Erreur de connexion : ", error)
       })
-      
-      this.GoToAnotherPageService.goToAnotherPage(this.status == "admin" ? this.status : "author")
+
     }else{
       this.formulaire.markAllAsTouched()
     }

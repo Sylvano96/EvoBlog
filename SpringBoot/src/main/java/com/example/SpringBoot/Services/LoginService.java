@@ -21,12 +21,11 @@ public class LoginService {
         Optional <Users> user = myIntreface.loginUserOptional(users.getEmail(), users.getPassword());
 
         if(user.isPresent()){
-            String [] data = {"evo-blog-pl-"+user.get().getId(), user.get().getStatus()};
-            return data;
-        }else{
-            String [] data = {"Erreur d'email ou de mot de passe"};
+            String [] data = {"evo-blog-pl-"+user.get().getId(), user.get().getStatus(), user.get().getName()};
             return data;
         }
+
+        throw new IllegalStateException("Utilisateur non trouvé");
     }
 
 }
