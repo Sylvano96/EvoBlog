@@ -14,7 +14,7 @@ export class NavBarAdminComponent {
     logOut(){
       this.AuthService.logOut('token')
       this.AuthService.logOut('user_id')
-      this.router.navigate(["/"])
+      this.router.navigate(["/login"])
     }
 
     onClick(url : string){
