@@ -2,11 +2,8 @@ package com.example.SpringBoot.Services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.SpringBoot.Entities.Users;
 import com.example.SpringBoot.Entities.posts;
-import com.example.SpringBoot.Interfaces.MyIntreface;
 import com.example.SpringBoot.Interfaces.PostRepository;
-import com.example.SpringBoot.Interfaces.CommentRepository;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -14,17 +11,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import java.util.*;
-import java.time.Duration;
-import java.time.Instant;
 
 @Service
 public class PostServices {
 
     @Autowired
     private PostRepository postRepository;
-
-    @Autowired
-    private MyIntreface myIntreface;
     
     // -------------------------------------------------------   POST   -----------------------------------------------------//
 

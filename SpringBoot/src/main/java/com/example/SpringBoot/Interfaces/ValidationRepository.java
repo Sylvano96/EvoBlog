@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.SpringBoot.Entities.Users;
 import com.example.SpringBoot.Entities.Validation;
 import java.util.*;
-import java.util.List;
 
 
 public interface ValidationRepository extends JpaRepository<Validation, Long> {

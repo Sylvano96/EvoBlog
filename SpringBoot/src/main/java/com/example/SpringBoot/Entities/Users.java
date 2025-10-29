@@ -1,7 +1,5 @@
 package com.example.SpringBoot.Entities;
 
-import java.util.List;
-
 import jakarta.persistence.*;
 import lombok.*;
 

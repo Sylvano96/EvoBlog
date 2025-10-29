@@ -1,12 +1,8 @@
 package com.example.SpringBoot.Services;
 
-import java.time.Duration;
-import java.time.Instant;
-import java.util.Random;
 
 import org.springframework.stereotype.Service;
 
-import com.example.SpringBoot.Entities.Users;
 import com.example.SpringBoot.Entities.Validation;
 import com.example.SpringBoot.Interfaces.ValidationRepository;
 
@@ -17,7 +13,6 @@ import lombok.AllArgsConstructor;
 public class ValidationService {
 
     private ValidationRepository validationRepository;
-    private NotificationService notificationService;
 
     // public Users saveValidation (Users user){
     //     Validation validation = new Validation();

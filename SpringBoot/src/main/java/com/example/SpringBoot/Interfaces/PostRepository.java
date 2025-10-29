@@ -4,13 +4,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
-import javax.swing.text.html.parser.Entity;
-
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.jpa.repository.Query;
 
 import com.example.SpringBoot.Entities.posts;
-import com.example.SpringBoot.Entities.Users;
 @Repository
 public interface PostRepository extends JpaRepository<posts, Long> {
 

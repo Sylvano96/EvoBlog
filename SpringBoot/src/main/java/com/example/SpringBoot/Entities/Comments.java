@@ -5,8 +5,6 @@ import lombok.*;
 import java.util.*;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
 
 
 
