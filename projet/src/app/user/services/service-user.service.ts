@@ -12,4 +12,8 @@ export class ServiceUserService {
   createUser(data : {name:string, lastName : string, email : string, status : string, password : string, actif:boolean}){
     return this.HttpClient.post('http://localhost:8080/api/create/user', data)
   }
+
+  loginUser(data : {email : string, password : string}){
+    return this.HttpClient.post('http://localhost:8080/api/login', data)
+  }
 }

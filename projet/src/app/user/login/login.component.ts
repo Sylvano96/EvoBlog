@@ -6,6 +6,7 @@ import {FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators} fr
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
 import { FooterComponent } from '../footer/footer.component';
 import { CreateServiceService } from '../../Author/Services/create-service.service';
+import { ServiceUserService } from '../services/service-user.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,7 @@ export class LoginComponent {
 
   formulaire : FormGroup
 
-  constructor(private service : CreateServiceService,private fb : FormBuilder, private AuthService: AuthService, private GoToAnotherPageService : GoToAnotherPageService){
+  constructor(private fb : FormBuilder, private AuthService: AuthService, private GoToAnotherPageService : GoToAnotherPageService, private serviceUserService : ServiceUserService){
     this.formulaire = this.fb.group({
       email : ['', Validators.required],
       password : ['', Validators.required]
@@ -30,7 +31,7 @@ export class LoginComponent {
 
   submit(){
     if(this.formulaire.valid){
-      this.service.login(this.formulaire.value).subscribe((response)=>{
+      this.serviceUserService.loginUser(this.formulaire.value).subscribe((response)=>{
         console.log(Object.values(response)[1])
 
         const x = Object.values(response)[0].split('-')
@@ -39,6 +40,8 @@ export class LoginComponent {
         this.AuthService.login(Object.values(response)[0])
 
         this.status = Object.values(response)[1]
+      }, (error)=>{
+        console.log("Erreur de connexion : ", error)
       })
       
       this.GoToAnotherPageService.goToAnotherPage(this.status == "admin" ? this.status : "author")
