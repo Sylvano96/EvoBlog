@@ -1,0 +1,42 @@
+<app-nav-bar></app-nav-bar>
+
+<div style="display: flex; justify-content: center; margin:20px 0;">
+    <div style="display: flex;justify-content: center;flex-wrap: wrap; align-items: center;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.237);padding: 20px 25px; border-radius: 15px; background-color: rgb(255, 255, 255); ">
+        <div>
+            <img src="/assets/istockphoto-1429201424-612x612.jpg" alt="" style="width: 100%; max-width: 600px; border-radius: 20px;">
+        </div>
+        <form class="p-4" [formGroup]="formulaire" style="width: 450px;">
+            <h5  style="font-size: 1.5rem;">S'inscrire à Evo-blog</h5>
+            <p class=" my-4" style="font-size: 1.1rem; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; ">Veuillez remplir le formulaire en bas pour s'inscrire</p>
+            
+            <label for="" style="font-size: 1.0rem; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Nom :</label>
+            <input type="text"  class="form-control my-3" name="name" formControlName="name"> 
+            <div *ngIf="formulaire.get('name')?.touched && formulaire.get('name')?.hasError('required')" class="text-center">
+                <p style="color: red;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Champ nom vide</p>
+            </div> 
+
+            <label for="" style="font-size: 1.0rem; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Prénom(s) :</label>
+            <input type="text"  class="form-control my-3" name="lastName" formControlName="lastName"> 
+
+            <label for="" style="font-size: 1.0rem; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Email :</label>
+            <input type="email"  class="form-control my-3" name="email" formControlName="email"> 
+            <div *ngIf="formulaire.get('email')?.touched && formulaire.get('email')?.hasError('required')" class="text-center">
+                <p style="color: red;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Champ email vide</p>
+            </div> 
+            <label for="" style="font-size: 1.0rem; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Mot de passe :</label>
+            <input type="password" class="form-control my-3" name="password" formControlName="password">
+            <div *ngIf="formulaire.get('password')?.touched && formulaire.get('password')?.hasError('required')" class="text-center">
+                <p style="color: red;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Champ mot de passe</p>
+            </div> 
+            <div style="display: flex; justify-content: flex-end; align-items: center;">
+                <a href="/login" class="mx-2" style="text-decoration: none; font-size: 1.0rem; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Se connecter sur un compte ?</a>
+                <button class="btn btn-primary" (click)="submit()">Connexion</button>
+            </div>
+            
+        </form>
+    </div>
+</div>
+
+<div *ngIf="errorCreate" class="alert alert-warning text-center" style="position:fixed; bottom: 10px; right:10px;">
+    Erreur d'envoie, {{errorMess}} .
+</div>

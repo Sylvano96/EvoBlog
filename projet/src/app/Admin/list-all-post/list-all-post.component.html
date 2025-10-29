@@ -1,0 +1,126 @@
+<app-nav-bar-admin></app-nav-bar-admin>
+<div>
+    <div style="display: flex; justify-content: space-around; flex-wrap: wrap; align-items: center;">
+        <h2 class="text-center my-3">LISTES DES POSTS PUBLIES</h2>
+        <form class="d-flex mx-3" role="search">
+            <input class="form-control me-2" type="search" placeholder="Titre du post ou status ..." aria-label="Search" style="padding: 8px 15px;" (input)="search($event)">
+            <button class="btn btn-primary" (click)="handleSearch()">Rechercher</button>
+        </form>
+        <div>
+            <p style="font-size: 20px;">Total : {{numTotal}}</p>
+        </div>
+    </div>
+    <div *ngIf="data.length == 0">
+        <app-not-found value="Auteurs"></app-not-found>
+    </div>
+    <div *ngIf="isLoading">
+        <app-spinner></app-spinner>
+    </div>
+    <div *ngIf="data.length != 0 && !isLoading" class="container" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
+        
+        <div class="card m-3" *ngFor="let item of data" style="width: 100%; max-width: 500px;">
+            <div style="display: flex; justify-content: center; margin: 10px 0;">
+                <img [src]="'http://localhost:8080/images/'+item.image" alt="" style="max-width: 400px; width: 100%; border-radius: 5px;">
+            </div>
+            <h5 class="text-center my-2">{{item.title}}</h5>
+            <div class="accordion my-3" id="accordionExample">
+                <div class="accordion-item" *ngFor="let x of item.contents;">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse'+x.id+x.titlePara.length" aria-expanded="false" [attr.aria-controls]="'collapse'+x.id+x.titlePara.length">
+                        {{x.titlePara}}
+                      </button>
+                    </h2>
+                    <div [id]="'collapse'+x.id+x.titlePara.length" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                      <div class="accordion-body" >
+                        <p style="font-size: 17px; text-align:justify; font-family: Georgia, 'Times New Roman', Times, serif">
+                            {{x.content}}
+                        </p>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: right;">
+                <p>{{item.createdAt | date:'dd/MM/yyyy HH:mm:s'}}</p>
+                <p>Status : {{item.status}}</p>
+                <p>Catégorie : {{item.category}}</p>
+                <div *ngFor="let x of dataUser">
+                    <p *ngIf="x.id == item.userId">{{item.status == "publié" ? "Publié" : "Créé"}} par : {{x.name + " " + x.lastName}}</p>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items:center;">
+                <div>
+                    <button class="btn btn-danger mx-2 my-2" (click)="toogleValide(item.id)">SUPPRIMER</button>
+                </div>
+                <div *ngIf="item.status != 'non publié'">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="getCommentsPost(item.id)">
+                        Commentaires <i class="fas fa-comments"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="valide" class="cont-del">
+    
+    <div style="font-family: Georgia, 'Times New Roman', Times, serif;background-color: white; width: 100%; max-width: 400px; padding: auto; border-radius: 8px;">
+        <div style="display: flex; justify-content: space-between; margin: 10px 0 20px 0;">
+            <h4 style="margin-left: 20px;" class="my-3">Validation</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="toogleValide(0)" style="margin-right: 10px; margin-bottom: 5px;"></button>
+        </div>
+        <div>
+            <p class="my-3 px-3" style=" text-align: center;">Voulez vous vraiment supprimer ce post ?</p>
+        </div>
+        <div class="my-3" style="display: flex; justify-content: flex-end;">
+            <button class="btn btn-primary" (click)="deletePost()">Oui</button>
+            <button (click)="toogleValide(0)" class="btn btn-primary mx-2">Non</button>
+        </div>
+    </div>
+    
+</div>
+
+<div *ngIf="isDelete" class="alert alert-success text-center" style="position:fixed; bottom: 10px; right:10px;">
+    {{message}} <i class="fas fa-check"></i>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div *ngIf="comDelete" class="alert alert-success text-center" style="position:fixed; bottom: 10px; right:10px;">
+                    {{messageSuccess}} <i class="fas fa-check"></i>
+                </div>
+                <div class="container my-3">
+                    <h3 class="my-3">Quelques Commentaire <i class="fas fa-comment-dots mx-2"></i></h3>
+                    <div class="cont-comment">
+                        <div *ngIf="dataCommentsPost.length == 0">
+                            <div class="comment my-2" style="padding: 5px; box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.438); background-color: white; border-radius: 10px;">
+                                <div style="text-align: center; word-wrap: break-word;">
+                                    <p>Il n'y a pas encore un commentaire ...</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="dataCommentsPost.length != 0">
+                            <div style="align-items: center; display: flex;" *ngFor="let item of dataCommentsPost">
+                                <div class="comment my-2" style="width: 100%; max-width: 800px; padding: 5px; box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.438); background-color: white; border-radius: 10px;">
+                                    <h5 style="text-align: left;">&#64; {{item.pseudo}}</h5>
+                                    <div style="text-align: center; word-wrap: break-word;">
+                                        <p>{{item.comment}}</p>
+                                    </div>
+                                    <p style="text-align: right;">{{item.createdAt | date:'dd/MM/yyyy HH:mm:s'}}</p>
+
+                                    <div style="display: flex; justify-content: flex-end;">
+                                        <button class="btn btn-danger mx-4 my-2" (click)="deleteComment(item.id)">Supprimer le commentaire</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+.navbar {
+  padding: 5px 20px;
+  background-color: #ffffff !important;
+}
+
+/* Branding */
+.brand {
+  font-size: 1.6rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: "Segoe UI", sans-serif;
+  transition: 0.3s ease;
+}
+
+.brand:hover {
+  color: #0d6efd;
+}
+
+/* Navigation Links */
+.nav-links .nav-link {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 0.8rem;
+  margin-right: 12px;
+  padding: 8px 10px;
+  transition: 0.3s ease;
+}
+
+.nav-links .nav-link:hover {
+  color: #0d6efd;
+  transform: translateY(-1px);
+}
+
+/* Login Button */
+.login-btn {
+  font-size: 0.95rem;
+  padding: 8px 18px;
+  display: flex;
+  align-items: center;
+}
+
+/* ✅ Responsive */
+@media (max-width: 768px) {
+  .nav-links .nav-link {
+    margin: 6px 0;
+    text-align: center;
+  }
+
+  .login-btn {
+    width: 100%;
+    margin-top: 10px;
+    justify-content: center;
+  }
+}

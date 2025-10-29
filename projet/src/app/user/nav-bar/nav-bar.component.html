@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+  <div class="container-fluid">
+    <a class="navbar-brand brand mb-2" (click)="onClick('')" role="button">
+      Evo-Blog
+    </a>
+
+    <button 
+      class="navbar-toggler" 
+      type="button" 
+      data-bs-toggle="collapse" 
+      data-bs-target="#navbarMenu" 
+      aria-controls="navbarMenu" 
+      aria-expanded="false" 
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarMenu">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-links">
+        <li class="nav-item">
+          <a class="nav-link" href="#home">Accueil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#posts">Posts récents</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#actualityPost">Fil d’actualités</a>
+        </li>
+      </ul>
+
+      <button class="btn btn-primary login-btn" (click)="onClick('/author')">
+        Se connecter 
+        <i class="fas fa-arrow-right ms-2"></i>
+      </button>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,66 @@
+<div id="posts">
+    <div style="padding: 0 40px;">
+        <div>
+            <h3 class="my-2 ph">Les posts récents</h3>
+        </div>
+        <div class="container-1">
+            <div *ngFor="let item of dataRecent">
+                <div class="card my-2" (click)="onClick(item.id)">
+                    <img [src]="'http://localhost:8080/images/'+item.image" alt="">
+                    <div class="title">
+                        <h3>{{item.title}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="dataRecent.length == 0" class="comment my-2" style="padding: 5px; box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.438); background-color: white; border-radius: 10px;">
+            <div class="my-2" style="text-align: center; word-wrap: break-word;">
+                <p style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Pas de récents posts pour le moment ...</p>
+            </div>
+        </div>
+    </div>
+    <div id="actualityPost">
+        <div>
+            <h3 class="py-3 ph" style="margin-left: 30px;">Les actualités</h3>
+        </div>
+        <div *ngIf="dataRecent.length == 0" class="comment my-2 container" style="padding: 5px; box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.438); background-color: white; border-radius: 10px;">
+            <div class="my-2" style="text-align: center; word-wrap: break-word;">
+                <p style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Pas de récents posts pour le moment ...</p>
+            </div>
+        </div>
+        <div class="all">
+            <div class="container-2">
+                <div *ngFor="let item of data | paginate :{itemsPerPage : itemsPerPage, currentPage : currentPage}">
+                    <div class="card2" (click)="onClick(item.id)">
+                        <img [src]="'http://localhost:8080/images/'+item.image" alt="">
+                        <div class="title">
+                            <h3>{{item.title}}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sticky-wraper">
+                <div>
+                    <div class="sticky-element">
+                        <h5 style="text-align: center;">Domaine de la Technologie et Société</h5>
+                        <div *ngFor="let item of dataTech">
+                            <div class="card1 my-2" (click)="onClick(item.id)">
+                                <div style="padding: 5px;">
+                                    <img [src]="'http://localhost:8080/images/'+item.image" alt="">
+                                </div>
+                                <div class="titleS">
+                                    <h3>{{item.title}}</h3>
+                                    <div class="info"><p>{{item.createdAt | date:'dd/MM/yyyy HH:mm:s'}}</p></div>
+                                </div>
+                            </div>
+                        </div>
+        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div  class=" my-3">
+        <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+.card{
+    border-radius: 5px; 
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.437); 
+    padding: 10px;
+}
+.cont-del{
+    position:fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.486);
+    top: 0;
+    left: 0;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+}
+.cont-comment .comment{
+    display: block;
+}

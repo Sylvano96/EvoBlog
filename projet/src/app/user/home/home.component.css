@@ -1,0 +1,81 @@
+.home-container {
+  padding: 40px 0 90px 0;
+}
+
+.intro-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.image-wrapper {
+  width: 550px;
+  height: 450px;
+  display: flex;
+  justify-content: center;
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+    animation: fadeIn 1s ease-in-out;
+  }
+}
+
+.text-content {
+  max-width: 500px;
+  text-align: center;
+
+  h1 {
+    font-family: "Segoe UI", sans-serif;
+    font-size: 2.3rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+  }
+
+  .description {
+    font-size: 1rem;
+    margin-top: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .btn {
+    width: 140px;
+    font-size: 1rem;
+  }
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ✅ Responsive */
+@media (max-width: 768px) {
+  .intro-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .image-wrapper {
+    width: 100%;
+    height: 300px;
+  }
+}

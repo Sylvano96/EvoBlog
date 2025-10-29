@@ -1,0 +1,28 @@
+<div style="position: absolute; top: 10px; left: 20px; font-size: 15px;">
+    <a href="/" style="font-family: cursive; font-weight: bold; text-decoration: none; color: black;" class="back"><i class="fas fa-angles-left"></i>  Retour à l'accueil</a>
+</div>
+<div class="container">
+    <div style="display: flex;justify-content: center;flex-wrap: wrap; align-items: center; height: 100vh; ">
+        <div style="display: flex; justify-content: center;flex-wrap: wrap;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.237);padding: 20px 25px; border-radius: 15px; background-color: rgb(255, 255, 255); align-items: center;">
+            <div>
+                <img style="width: 100%; max-width: 500px; border-radius: 20px;" src="/assets/email-verification-concept-receiving-incoming-email-sending-and-receiving-verification-emails-can-be-used-for-web-pages-banners-mobile-apps-flat-illustration-on-background-vector.jpg" alt="">
+            </div>
+            <section>
+                <p style="display: block;width: 400px; text-align: center; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 20px; word-wrap: break-word;">
+                    Nous avons envoyer un email à vous, Veuillez consulter cet email et
+                    saisir votre code de validation en bas afin de finaliser votre inscription
+                    chez Evo-Blog. 
+                </p>
+                <form action="" style="display: block;" [formGroup]="validate">
+                    <input type="text" class="form-control my-3" name="value" formControlName="value">
+                    <div *ngIf="validate.get('value')?.touched && validate.get('value')?.hasError('required')" >
+                        <p style="color: red; font-size: 15px; font-family: cursive; font-weight: bold;">Veuillez compléter le champ vide</p>
+                    </div>
+                    <div style="display: flex; justify-content: flex-end;">
+                        <button class="btn btn-primary my-2" (click)="submit()">Valider mon code</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+</div>

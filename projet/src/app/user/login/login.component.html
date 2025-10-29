@@ -1,0 +1,31 @@
+<div>
+    <app-nav-bar></app-nav-bar>
+</div>
+<div>
+    <div style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+        <div style="display: flex;justify-content: center;flex-wrap: wrap; align-items: center;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.237);padding: 20px 25px; border-radius: 15px; background-color: rgb(255, 255, 255); ">
+            <div>
+                <img src="/assets/istockphoto-1429201424-612x612.jpg" alt="" style="width: 100%; max-width: 600px; border-radius: 20px;">
+            </div>
+            <form class="p-4" [formGroup]="formulaire" style="width: 400px;">
+                <h5  style="font-size: 1.5rem;">Se connecter à Evo-blog</h5>
+                <p class=" my-4" style="font-size: 1.1rem; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Veuillez remplir le formulaire pour se connecter</p>
+                <label for="" style="font-size: 1.0rem; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Email :</label>
+                <input type="email"  class="form-control my-3" name="email" formControlName="email"> 
+                <div *ngIf="formulaire.get('email')?.touched && formulaire.get('email')?.hasError('required')" class="text-center">
+                    <p style="color: red;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Champ email vide</p>
+                </div> 
+                <label for="" style="font-size: 1.0rem; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Mot de passe :</label>
+                <input type="password" class="form-control my-3" name="password" formControlName="password">
+                <div *ngIf="formulaire.get('password')?.touched && formulaire.get('password')?.hasError('required')" class="text-center">
+                    <p style="color: red;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Champ mot de passe</p>
+                </div> 
+                <div style="display: flex; justify-content: flex-end; align-items: center;">
+                    <a href="/signUp" class="mx-2" style="text-decoration: none; font-size: 1.0rem; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Créer un compte ?</a>
+                    <button class="btn btn-primary" (click)="submit()">Connexion</button>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>

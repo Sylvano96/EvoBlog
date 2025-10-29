@@ -1,0 +1,56 @@
+<app-nav-bar-admin></app-nav-bar-admin>
+<div>
+    <div style="display: flex; justify-content: space-around; flex-wrap: wrap; align-items: center;">
+        <h2 class="text-center my-3">LISTES DES POSTS PUBLIES AVEC NON PUBLIES</h2>
+    </div>
+    <div *ngIf="data.length == 0">
+        <app-not-found value="Posts"></app-not-found>
+    </div>
+    <div *ngIf="isLoading">
+        <app-spinner></app-spinner>
+    </div>
+    <div *ngIf="data.length != 0 && !isLoading" class="container" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
+        
+        <div class="card m-3" *ngFor="let item of data" style="width: 100%; max-width: 500px;">
+            <div style="display: flex; justify-content: center; margin: 10px 0;">
+                <img [src]="'http://localhost:8080/images/'+item.image" alt="" style="max-width: 400px; width: 100%; border-radius: 5px;">
+            </div>
+            <h5 class="text-center my-2">{{item.title}}</h5>
+            <div class="accordion my-3" id="accordionExample">
+                <div class="accordion-item" *ngFor="let x of item.contents;">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse'+x.id+x.titlePara.length" aria-expanded="false" [attr.aria-controls]="'collapse'+x.id+x.titlePara.length">
+                        {{x.titlePara}}
+                      </button>
+                    </h2>
+                    <div [id]="'collapse'+x.id+x.titlePara.length" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                      <div class="accordion-body" >
+                        <p style="font-size: 17px; text-align:justify; font-family: Georgia, 'Times New Roman', Times, serif">
+                            {{x.content}}
+                        </p>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: right;">
+                <p>{{item.createdAt | date:'dd/MM/yyyy HH:mm:s'}}</p>
+                <p>Status : {{item.status}}</p>
+                <p>Catégorie : {{item.category}}</p>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items:center;">
+                <!-- <div>
+                    <button class="btn btn-warning my-2" (click)="onClick(item.id)" style="display: inline;">MODIFIER</button>
+                    <div *ngIf="item.status == 'non publié'" style="display: inline;">
+                        <button class="btn btn-danger mx-2 my-2" (click)="toogleValide(item.id)">SUPPRIMER</button>
+                    </div>
+                </div>
+                <div *ngIf="item.status != 'non publié'">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="getCommentsPost(item.id)">
+                        Commentaires
+                    </button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>

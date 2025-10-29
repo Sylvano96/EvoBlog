@@ -1,0 +1,31 @@
+<app-nav-bar-admin></app-nav-bar-admin>
+<div class="container my-3">
+    <div class="cont-1">
+        <div class="card-1">
+            <p class="ph">TOTAL DES PUBLIES</p>
+            <p class="nb">{{nbPublie}}</p>
+        </div>
+        <div class="card-2">
+            <p class="ph">TOTAL DES NON PUBLIES</p>
+            <p class="nb">{{nbNonPublie}}</p>
+        </div>
+        <div class="card-3">
+            <p class="ph">TOTAL DES POSTS ENREGISTRES</p>
+            <p class="nb">{{nbPublie + nbNonPublie}}</p>
+        </div>
+        <div class="card-4">
+            <p class="ph">NOMBRE DE REDACTEUR</p>
+            <p class="nb">{{nbRedac}}</p>
+        </div>
+    </div>
+</div>
+
+
+<div class="my-2" style="display: flex; justify-content: center; flex-wrap: wrap;">
+    <div class='chart'>
+        <canvas id="canvas"></canvas>
+    </div>
+    <div class='chart'>
+        <canvas #chartCanvas></canvas>
+    </div>
+</div>

@@ -1,0 +1,77 @@
+/* Footer principal */
+footer {
+    width: 100%;
+    padding: 25px 20px;
+    background-color: #ffffff; /* même couleur que navbar */
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-family: "Segoe UI", sans-serif;
+    border-top: 1px solid #eaeaea;
+}
+
+/* Titres du footer */
+footer h5 {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 10px;
+}
+
+/* Liste des icônes sociales */
+footer .url {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+footer .url ul {
+    display: flex;
+    gap: 12px;
+    padding: 0;
+    margin: 0;
+}
+
+footer .url li {
+    list-style: none;
+}
+
+footer .url a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 42px;
+    height: 42px;
+    background-color: #f1f1f1;
+    border-radius: 50%;
+    color: #0d6efd;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+footer .url a:hover {
+    background-color: #0d6efd;
+    color: #fff;
+    transform: scale(1.15);
+}
+
+/* Texte centré en bas */
+footer p {
+    width: 100%;
+    text-align: center;
+    color: #555;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    footer {
+        flex-direction: column;
+        gap: 15px;
+    }
+}

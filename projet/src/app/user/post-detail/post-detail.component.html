@@ -1,0 +1,114 @@
+<div>
+    <app-nav-bar></app-nav-bar>
+</div>
+<div class="container-2">
+    <div>
+        <div class="container">
+            <div class="cont-2-1">
+                <div class="cont-2-2">
+                    
+                    <img [src]="image" alt="">
+                </div>
+                <div class="cont-2-3" style="font-family: Arial, Helvetica, sans-serif; ">
+                    <h2>{{title}}</h2>
+                    <p class="text-right">Publié par <strong>{{name}}</strong></p>
+                    <p>Le {{date | date:'dd/MM/yyyy HH:mm:s'}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="my-3">
+            <div class="p-4" *ngFor="let item of contents">
+                <h4 class="my-3">{{item.titlePara}}</h4>
+
+                <p style="font-size: 17px; text-align:justify; margin-bottom: 20px; font-family: Georgia, 'Times New Roman', Times, serif">
+                    {{item.content}}
+                </p>
+            </div>
+        </div>
+        <div class="container">
+            <div>
+                <h3 class="my-3">Concernant ce post <i class="fas fa-comments mx-2"></i></h3>
+            </div>
+            <div class="cont-comment">
+                <div *ngIf="dataComment.length == 0">
+                    <div class="comment my-2" style="padding: 5px; box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.438); background-color: white; border-radius: 10px;">
+                        <div class="my-2" style="text-align: center; word-wrap: break-word;">
+                            <p style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Il n'y a pas encore un commentaire ...</p>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="dataComment.length != 0">
+                    <div style="max-width: 600px; width:100%" *ngFor="let item of dataComment">
+                        <div class="comment my-2" style="padding: 5px; box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.438); background-color: white; border-radius: 10px;">
+                            <h5 style="text-align: left;">&#64; {{item.pseudo}}</h5>
+                            <div style="text-align: left; word-wrap: break-word;">
+                                <p>{{item.comment}}</p>
+                            </div>
+                            <p style="text-align: right;">{{item.createdAt | date:'dd/MM/yyyy HH:mm:s'}}</p>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+            <div class="my-4" style="box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.438); background-color: white; border-radius: 10px; padding: 5px;">
+                <h4 class="m-2">Commentaire <i class="fas fa-comment-dots mx-2"></i></h4>
+                <form [formGroup]="Comment">
+                    <input type="text" class="form-control my-3" placeholder="Pseudonyme" style="width:200px" formControlName="pseudo" name="pseudo">
+                    <div *ngIf="Comment.get('pseudo')?.touched && Comment.get('pseudo')?.hasError('required')" class="text-center alert alert-warning">
+                        <p class="text-center" >Pseudonyme vide</p>
+                    </div>
+                    <textarea name="comment" formControlName="comment" id="" class="form-control" placeholder="Commentaire ..."></textarea>
+                    <div *ngIf="Comment.get('comment')?.touched && Comment.get('comment')?.hasError('required')" class="text-center alert alert-warning my-2">
+                        <p class="text-center" >Commentaire vide</p>
+                    </div>
+                    <div style="display: flex; justify-content: flex-end;">
+                        <button class="btn btn-primary my-2" (click)="submit()"> Envoyer </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="container">
+            <div>
+                <h3 class="my-4">Les mêmes posts</h3>
+            </div>
+            <div class="container-1">
+                <div *ngIf="sameCategoryData.length != 0">
+                    <div *ngFor="let item of sameCategoryData">
+                        <div class="card my-2" (click)="changeData(item.id)">
+                            <img [src]="'http://localhost:8080/images/'+item.image" alt={{item.title}}>
+                            <div class="title">
+                                <h3>{{item.title}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="sameCategoryData.length == 0" class="comment my-2" style="padding: 5px; box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.438); background-color: white; border-radius: 10px;">
+                <div class="my-2" style="text-align: center; word-wrap: break-word;">
+                    <p style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Il n' y a pas de post ressemblant à ça ...</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class='my-3'>
+                <div>
+                    <h3 class="my-2">Les posts récents</h3>
+                </div>
+                <div class="container-1">
+                    <div *ngFor="let item of actualityData">
+                        <div class="card m-2" (click)="changeData(item.id)">
+                            <img [src]="'http://localhost:8080/images/'+item.image" alt={{item.title}}>
+                            <div class="title">
+                                <h3>{{item.title}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <app-footer></app-footer>
+</div>
