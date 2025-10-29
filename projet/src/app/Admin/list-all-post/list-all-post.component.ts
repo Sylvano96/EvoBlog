@@ -153,6 +153,11 @@ export class ListAllPostComponent {
     })
   }
 
+  getUserName(id: number) {
+    return this.dataUser.find(u => u.id === id)?.name + ' ' + this.dataUser.find(u => u.id === id)?.lastName;
+  }
+
+
 }
 
 // const dataInit = this.data

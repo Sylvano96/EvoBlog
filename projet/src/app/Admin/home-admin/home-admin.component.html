@@ -1,31 +1,52 @@
 <app-nav-bar-admin></app-nav-bar-admin>
-<div class="container my-3">
-    <div class="cont-1">
-        <div class="card-1">
-            <p class="ph">TOTAL DES PUBLIES</p>
-            <p class="nb">{{nbPublie}}</p>
-        </div>
-        <div class="card-2">
-            <p class="ph">TOTAL DES NON PUBLIES</p>
-            <p class="nb">{{nbNonPublie}}</p>
-        </div>
-        <div class="card-3">
-            <p class="ph">TOTAL DES POSTS ENREGISTRES</p>
-            <p class="nb">{{nbPublie + nbNonPublie}}</p>
-        </div>
-        <div class="card-4">
-            <p class="ph">NOMBRE DE REDACTEUR</p>
-            <p class="nb">{{nbRedac}}</p>
-        </div>
+
+<div class="admin-container container my-4">
+
+  <h2 class="title">Tableau de Bord</h2>
+
+  <div class="stats-grid">
+    <div class="stat-card published">
+      <div class="icon"><i class="fas fa-check-circle"></i></div>
+      <div>
+        <p class="label">Total Publiés</p>
+        <p class="value">{{nbPublie}}</p>
+      </div>
     </div>
-</div>
 
+    <div class="stat-card not-published">
+      <div class="icon"><i class="fas fa-times-circle"></i></div>
+      <div>
+        <p class="label">Non Publiés</p>
+        <p class="value">{{nbNonPublie}}</p>
+      </div>
+    </div>
 
-<div class="my-2" style="display: flex; justify-content: center; flex-wrap: wrap;">
+    <div class="stat-card posts-saved">
+      <div class="icon"><i class="fas fa-database"></i></div>
+      <div>
+        <p class="label">Posts Enregistrés</p>
+        <p class="value">{{nbPublie + nbNonPublie}}</p>
+      </div>
+    </div>
+
+    <div class="stat-card writers">
+      <div class="icon"><i class="fas fa-user-edit"></i></div>
+      <div>
+        <p class="label">Rédacteurs</p>
+        <p class="value">{{nbRedac}}</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="title mt-4">Statistiques</h3>
+
+  <div class="charts-container">
     <div class='chart'>
         <canvas id="canvas"></canvas>
     </div>
     <div class='chart'>
         <canvas #chartCanvas></canvas>
     </div>
+  </div>
+
 </div>

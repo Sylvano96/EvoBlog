@@ -1,0 +1,25 @@
+.navbar {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background: #ffffff !important;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: #2E7D32 !important;
+}
+
+.nav-link {
+    font-size: 17px;
+    margin: 0 8px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-link:hover {
+    color: #1565C0 !important;
+}
+
+button.btn-danger {
+    font-size: 16px;
+    border-radius: 8px;
+}

@@ -42,7 +42,7 @@ export class LoginComponent {
         this.status = Object.values(response)[1]
         if(this.status == "admin"){
           this.GoToAnotherPageService.goToAnotherPage("admin")
-        }else if(this.status == "author"){
+        }else if(this.status == "redacteur"){
           this.GoToAnotherPageService.goToAnotherPage("author")
         }
       }, (error)=>{
