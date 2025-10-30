@@ -8,4 +8,8 @@ import { Component, Input } from '@angular/core';
 })
 export class NotFoundComponent {
   @Input()  value : string  = "Elément"
+
+    onBack() {
+    window.history.back();
+  }
 }

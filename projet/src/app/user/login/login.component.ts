@@ -38,7 +38,7 @@ export class LoginComponent {
         
         this.AuthService.setAuthId(x[3])
         this.AuthService.login(Object.values(response)[0])
-
+        this.AuthService.setName(Object.values(response)[2])
         this.status = Object.values(response)[1]
         if(this.status == "admin"){
           this.GoToAnotherPageService.goToAnotherPage("admin")

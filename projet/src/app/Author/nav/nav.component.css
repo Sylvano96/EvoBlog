@@ -6,7 +6,7 @@
 }
 
 .custom-navbar .blog-brand {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: bold;
   font-family: "Poppins", sans-serif;
   color: #007bff !important;
@@ -20,11 +20,11 @@
   background: transparent;
   border: none;
   padding: 8px 16px;
-  transition: 0.3s ease;
   position: relative;
+  transition: 0.3s ease;
 }
 
-/* ✅ Effet hover animé */
+/* ✅ Effet Hover */
 .custom-navbar .nav-link:hover,
 .custom-navbar .nav-link.active {
   color: #007bff !important;
@@ -47,6 +47,27 @@
   left: 0;
 }
 
+/* ✅ User Display */
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  padding: 0 12px;
+  border-left: 1px solid #e0e0e0;
+}
+
+.user-icon {
+  font-size: 1.4rem;
+  margin-right: 6px;
+  color: #007bff;
+}
+
+.user-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
 /* ✅ Responsive */
 @media (max-width: 768px) {
   .navbar-nav {
@@ -57,5 +78,12 @@
   .custom-navbar .nav-link {
     width: 100%;
     padding: 12px;
+  }
+
+  .user-info {
+    justify-content: center;
+    width: 100%;
+    border: none;
+    margin-top: 10px;
   }
 }

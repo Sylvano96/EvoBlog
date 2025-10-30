@@ -1,10 +1,24 @@
-<div>
-    <div class="container my-2" style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap;">
-        <div>
-            <img src="/assets/png/6167023.webp" alt="" style="max-width: 500px; width: 100%;">
-        </div>
-        <div>
-            <h3 style="font-family: Verdana, Geneva, Tahoma, sans-serif;">{{value}} introuvables ....</h3>
-        </div>
-    </div>
+<div class="flex flex-col items-center justify-center py-10 px-4">
+  <div class="max-w-xl w-full flex flex-col items-center space-y-6">
+    
+    <!-- Image Section -->
+    <img 
+      src="/assets/png/6167023.webp" 
+      alt="Not Found"
+      class="w-full max-w-sm object-contain animate-pulse"
+    />
+
+    <!-- Message Section -->
+    <h3 class="text-2xl font-semibold text-gray-800 dark:text-white text-center tracking-wide">
+      {{ value }} introuvables...
+    </h3>
+
+    <!-- Suggested Action -->
+    <button
+      class="px-5 py-3 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
+      (click)="onBack()"
+    >
+      Retour
+    </button>
+  </div>
 </div>

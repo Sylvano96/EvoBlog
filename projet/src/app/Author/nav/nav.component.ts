@@ -1,6 +1,6 @@
 import { GoToAnotherPageService } from '../../user/services/go-to-another-page.service';  
 import { AuthService } from './../../AuthGuard/authService';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,14 +9,22 @@ import { Router } from '@angular/router';
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.css'
 })
-export class NavComponent {
+export class NavComponent implements OnInit {
 
   constructor(private router : Router, private AuthService : AuthService, private GoToAnotherPageService: GoToAnotherPageService){}
+  
+  userName : string | null  = 'Utilisateur';
+
+  ngOnInit(): void {
+    this.userName = this.AuthService.getName();
+  }
+  
   logOut(){
-    this.AuthService.logOut('token')
-    this.AuthService.logOut('user_id')
+    this.AuthService.logOut()
     this.router.navigate(["/login"])
   }
+
+  
 
   onClick(url : string){
     this.GoToAnotherPageService.goToAnotherPage(url)

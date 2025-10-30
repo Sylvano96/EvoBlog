@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg custom-navbar shadow-sm">
   <div class="container-fluid">
-    
+
     <a class="navbar-brand blog-brand" (click)="onClick('author')" role="button">
       Evo-Blog
     </a>
@@ -15,28 +15,39 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
+      <ul class="navbar-nav ms-auto align-items-center">
+
         <li class="nav-item">
           <button class="nav-link" (click)="onClick('author')">
             Accueil
           </button>
         </li>
+
         <li class="nav-item">
           <button class="nav-link" (click)="onClick('create')">
             Ajouter
           </button>
         </li>
+
         <li class="nav-item">
           <button class="nav-link" (click)="onClick('list')">
             Mes Posts
           </button>
         </li>
+
+        <!-- ✅ Affichage du nom utilisateur -->
+        <li class="nav-item user-info">
+          <i class="fas fa-user-circle user-icon"></i>
+          <span class="user-name">{{userName}}</span>
+        </li>
+
         <!-- Bouton Déconnexion -->
         <li class="nav-item">
           <button class="btn btn-outline-danger ms-3" (click)="logOut()">
             Déconnexion
           </button>
         </li>
+
       </ul>
     </div>
 

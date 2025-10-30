@@ -26,7 +26,17 @@ export class AuthService {
         return localStorage.getItem('user_id')
     }
 
-    logOut(value:string){
-        localStorage.removeItem(value)
+    getName(){
+        return localStorage.getItem('name')
+    }
+
+    setName(name:string){
+        localStorage.setItem('name', name)
+    }
+
+    logOut(){
+        localStorage.removeItem("name")
+        localStorage.removeItem("user_id")
+        localStorage.removeItem("token")
     }
 }

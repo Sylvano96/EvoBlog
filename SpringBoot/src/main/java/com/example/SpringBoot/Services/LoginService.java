@@ -21,10 +21,12 @@ public class LoginService {
         Optional <Users> user = myIntreface.loginUserOptional(users.getEmail(), users.getPassword());
 
         if(user.isPresent()){
-            String [] data = {"evo-blog-pl-"+user.get().getId(), user.get().getStatus(), user.get().getName()};
-            return data;
-        } else if (users.getEmail() == "eliasvano78@gmail.com" && users.getPassword() == "eliasvano"){
-            String [] data = {"evo-blog-pl-"+"00000", "admin", "Administrateur"};
+            String[] data = {
+                "evo-blog-pl-" + user.get().getId(),
+                String.valueOf(user.get().getStatus()),
+                user.get().getName() + " " + user.get().getLastName()
+            };
+            
             return data;
         }
 

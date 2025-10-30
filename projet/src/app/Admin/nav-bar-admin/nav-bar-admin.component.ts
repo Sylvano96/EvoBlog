@@ -12,8 +12,7 @@ import { AuthService } from '../../AuthGuard/authService';
 export class NavBarAdminComponent {
   constructor(private router : Router, private AuthService : AuthService, private GoToAnotherPageService: GoToAnotherPageService){}
     logOut(){
-      this.AuthService.logOut('token')
-      this.AuthService.logOut('user_id')
+      this.AuthService.logOut()
       this.router.navigate(["/login"])
     }
 
