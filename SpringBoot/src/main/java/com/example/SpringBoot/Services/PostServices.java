@@ -1,4 +1,5 @@
 package com.example.SpringBoot.Services;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,6 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import java.util.*;
 
 @Service
@@ -17,188 +17,163 @@ public class PostServices {
 
     @Autowired
     private PostRepository postRepository;
-    
-    // -------------------------------------------------------   POST   -----------------------------------------------------//
 
-    private String newImageFileName;
-    
     private String uploadDir = "D:/L3/ProjetSpring/images/";
 
-    public posts createPost(posts post){
-
+    // ------------------------ CREATE POST ------------------------
+    public posts createPost(posts post) {
         try {
-            String imageName = post.getImage();
-            String imagePath = Paths.get(uploadDir, imageName).toString();
-            System.out.println("Le file : " + imageName);
+            String originalName = post.getImage();
 
-            UUID uuid = UUID.randomUUID();
+            if (originalName != null && !originalName.isEmpty()) {
+                // Sécuriser le nom de fichier
+                String safeName = originalName.trim()
+                        .replaceAll("\\s+", "_")                     // remplacer espaces par _
+                        .replaceAll("[^a-zA-Z0-9._-]", "");         // retirer caractères spéciaux
 
-            String uuidStr = uuid.toString();
+                String newFileName = UUID.randomUUID().toString() + "_" + safeName;
 
-            newImageFileName = uuidStr+imageName;
-            File imageFile = new File(imagePath);
-            System.out.println("Le file ato raha misy : " + imageFile);
+                Path oldPath = Paths.get(uploadDir).resolve(originalName);
+                Path newPath = Paths.get(uploadDir).resolve(newFileName);
 
-            if (imageFile.exists()){
-                Path lastFilePath = Paths.get(uploadDir + imageName);
-                Path newFilePath = Paths.get(uploadDir + newImageFileName);
-                System.out.println("L'ancien file : " + lastFilePath);
-                System.out.println("Nouveau file : " + newFilePath);
-                Files.move(lastFilePath, newFilePath);
-            }   
-            post.setImage(newImageFileName);
+                if (Files.exists(oldPath)) {
+                    Files.move(oldPath, newPath);
+                    System.out.println("Fichier déplacé : " + newPath);
+                } else {
+                    System.err.println("Fichier non trouvé : " + oldPath);
+                }
+
+                post.setImage(newFileName);
+            }
+
             postRepository.save(post);
-        } catch (Exception e) {
-            System.err.println("Erreur : "+ e);
-        }
-        return post;
 
+        } catch (Exception e) {
+            System.err.println("Erreur lors de la création du post : " + e);
+        }
+
+        return post;
     }
 
-    public List<posts> getUserPosts(Integer id){
+    // ------------------------ GET POSTS ------------------------
+    public List<posts> getUserPosts(Integer id) {
         return postRepository.findUserPosts(id);
     }
 
-    public List<posts> getSearchPosts(String value){
+    public List<posts> getSearchPosts(String value) {
         return postRepository.searchPost(value);
     }
 
-    public List<posts> getAllPosts(){
+    public List<posts> getAllPosts() {
         return postRepository.findAllByOrderByCreatedAtDesc();
     }
 
-    public Optional<posts> getOnePost(Long id){
+    public Optional<posts> getOnePost(Long id) {
         return postRepository.findById(id);
     }
 
-    private String lastImage;
-    private String newImage;
-
-    public posts updatePost(posts updatePost, Long id){
-
-        posts x = postRepository.findById(id).map(post -> {
+    // ------------------------ UPDATE POST ------------------------
+    public posts updatePost(posts updatePost, Long id) {
+        return postRepository.findById(id).map(post -> {
             post.setTitle(updatePost.getTitle());
             post.setContents(updatePost.getContents());
             post.setStatus(updatePost.getStatus());
             post.setCategory(updatePost.getCategory());
 
-            System.out.println("L'ancien :"+post.getImage());
-            System.out.println("La nouvelle :"+updatePost.getImage());
-
             try {
-
-                lastImage = post.getImage();
-                newImage = updatePost.getImage();
-
-                if(post.getImage() == updatePost.getImage()){
-                    String imageName = post.getImage();
-                    String imagePath = Paths.get(uploadDir, imageName).toString();
-                    File imageFile = new File(imagePath);
-                    if (imageFile.exists()){
-                        imageFile.delete();
+                String newImageName = updatePost.getImage();
+                if (newImageName != null && !newImageName.isEmpty() && !newImageName.equals(post.getImage())) {
+                    // Supprimer ancien fichier si existe
+                    Path oldFilePath = Paths.get(uploadDir).resolve(post.getImage());
+                    if (Files.exists(oldFilePath)) {
+                        Files.delete(oldFilePath);
+                        System.out.println("Ancien fichier supprimé : " + oldFilePath);
                     }
+
+                    // Déplacer nouveau fichier
+                    String safeName = newImageName.trim()
+                            .replaceAll("\\s+", "_")
+                            .replaceAll("[^a-zA-Z0-9._-]", "");
+                    String finalFileName = UUID.randomUUID().toString() + "_" + safeName;
+                    Path newFilePath = Paths.get(uploadDir).resolve(finalFileName);
+
+                    Path tempPath = Paths.get(uploadDir).resolve(newImageName);
+                    if (Files.exists(tempPath)) {
+                        Files.move(tempPath, newFilePath);
+                        System.out.println("Nouveau fichier déplacé : " + newFilePath);
+                    }
+
+                    post.setImage(finalFileName);
                 }
 
-                post.setImage(updatePost.getImage());
-                postRepository.save(post);
-
-              
             } catch (Exception e) {
-                System.err.println("Erreur : "+ e);
+                System.err.println("Erreur lors de la mise à jour du post : " + e);
             }
 
-            cleanUpImages();
-
-            return updatePost;
-        }
-        ).orElseThrow(()-> new RuntimeException("Post non trouvé"));
-
-        if(lastImage == newImage){
-            System.out.println("Identique");
-        }else{
-            System.out.println("Différente");
-        }
-
-        return x;
-        
+            postRepository.save(post);
+            return post;
+        }).orElseThrow(() -> new RuntimeException("Post non trouvé"));
     }
 
-    public boolean deletePost(Long id){
-        if(postRepository.existsById(id)){
-            Optional <String>  post = postRepository.findById(id).map(posts::getImage);
-            String imageName = post.orElse("Post non trouvé");
-            String imagePath = Paths.get("D:/L3/ProjetSpring/images/", imageName).toString();
-
-            File imageFile = new File(imagePath);
-
-            // Comments com =  commentRepo.findByPostId(id).orElseThrow(()-> new RuntimeException("Commentaires introuvables"));
-
-            // commentRepo.delete(com);
-
-            if (imageFile.exists()){
-                imageFile.delete();
+    // ------------------------ DELETE POST ------------------------
+    public boolean deletePost(Long id) {
+        return postRepository.findById(id).map(post -> {
+            try {
+                Path imagePath = Paths.get(uploadDir).resolve(post.getImage());
+                if (Files.exists(imagePath)) {
+                    Files.delete(imagePath);
+                    System.out.println("Fichier supprimé : " + imagePath);
+                }
+            } catch (Exception e) {
+                System.err.println("Erreur lors de la suppression de l'image : " + e);
             }
+
             postRepository.deleteById(id);
-            return true ;
-        } else {
-            return false;
-        }
+            return true;
+        }).orElse(false);
     }
-    
-    /************************************** IMAGES ************************************** */
 
-    public List <String> getAllImages(){
+    // ------------------------ IMAGES ------------------------
+    public List<String> getAllImages() {
         return postRepository.findAllImages();
-    } 
+    }
 
-    public void cleanUpImages(){
-        List <String> imageName = getAllImages();
+    public void cleanUpImages() {
+        List<String> imageNames = getAllImages();
+        File folder = new File(uploadDir);
+        File[] listOfFiles = folder.listFiles();
 
-        File folder = new File("D:/L3/ProjetSpring/images/");
-        File [] listOfFiles = folder.listFiles();
-        
-        if(listOfFiles != null){
-            for (File file : listOfFiles){
-                if(file.isFile()){
-                    String fileName = file.getName();
-                    if(!imageName.contains(fileName)){
-                        file.delete();
-                        System.out.println("Deleted : "+fileName);
-                    }
+        if (listOfFiles != null) {
+            for (File file : listOfFiles) {
+                if (file.isFile() && !imageNames.contains(file.getName())) {
+                    file.delete();
+                    System.out.println("Fichier supprimé (cleanup) : " + file.getName());
                 }
             }
         }
     }
 
-    
-    public List<Object[]> getPublishedPostsCountByCategoryLastMonth(){
+    // ------------------------ STATISTICS ------------------------
+    public List<Object[]> getPublishedPostsCountByCategoryLastMonth() {
         Calendar calendar = Calendar.getInstance();
-
         calendar.add(Calendar.MONTH, -1);
         calendar.set(Calendar.DAY_OF_MONTH, 1);
-
         Date startDate = calendar.getTime();
-
         calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-
-        Date endDate= calendar.getTime();
+        Date endDate = calendar.getTime();
 
         return postRepository.countPublishedPostsByCategoryLastMonth(startDate, endDate);
-
     }
 
-    public List<Object[]> getPublishedPostsCountByCategory(){
-
+    public List<Object[]> getPublishedPostsCountByCategory() {
         return postRepository.countPublishedPostsByCategory();
-
     }
 
-    public List<Object[]> postsUsers(){
+    public List<Object[]> postsUsers() {
         return postRepository.findUsersPostsCountsList();
     }
 
-    public List<Object[]> postsUserCount(Integer id){
+    public List<Object[]> postsUserCount(Integer id) {
         return postRepository.findUserPostsCount(id);
     }
-
 }
