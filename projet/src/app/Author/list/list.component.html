@@ -106,18 +106,21 @@
         <p class="text-center text-muted">Aucun commentaire pour le moment...</p>
       </div>
 
-      <div *ngIf="dataCommentsPost.length > 0" class="list-group">
-        <div *ngFor="let item of dataCommentsPost" class="list-group-item comment-item">
-          <strong>{{"@ "+item.pseudo}}</strong>
-          <p>{{item.comment}}</p>
-          <small class="text-muted">{{item.createdAt | date:'dd/MM/yyyy HH:mm:s'}}</small>
-
-          <button class="btn btn-sm btn-outline-danger mt-2 float-end"
-                  (click)="deleteComment(item.id)">
-            Supprimer
-          </button>
+      <div *ngIf="dataCommentsPost.length > 0" class="comments-container">
+        <div *ngFor="let item of dataCommentsPost" class="comment-card">
+          <div class="comment-header">
+            <strong class="comment-author">{{ "@ " + item.pseudo }}</strong>
+            <small class="comment-date">{{ item.createdAt | date:'dd/MM/yyyy HH:mm:ss' }}</small>
+          </div>
+          <p class="comment-text">{{ item.comment }}</p>
+          <div class="comment-actions">
+            <button class="btn btn-sm btn-outline-danger" (click)="deleteComment(item.id)">
+              <i class="fas fa-trash-alt"></i> Supprimer
+            </button>
+          </div>
         </div>
       </div>
+
 
     </div>
   </div>
