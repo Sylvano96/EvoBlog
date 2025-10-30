@@ -1,27 +1,43 @@
 <div>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-          <a class="navbar-brand" (click)="onClick('admin')" style="cursor: pointer; font-size: 25px;">Evo-Blog</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0"> 
-              <li class="nav-item">
-                <a class="nav-link" (click)="onClick('admin')">Tableau de Bord</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link"  (click)="onClick('listAllPost')">Liste des posts</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link"  (click)="onClick('listAllUsers')">Liste des utilisateurs</a>
-              </li>
-            </ul>
-            <!-- <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            </form> -->
-            <button class="btn btn-danger mx-2 my-1" (click)="logOut()">Se Déconnecter <i class="far fa-user"></i></button>
-          </div>
+  <nav class="navbar navbar-expand-lg custom-navbar shadow-sm">
+    <div class="container-fluid">
+
+      <a class="navbar-brand" (click)="onClick('admin')">
+        Evo-Blog <span class="admin-badge">ADMIN</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="adminNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+          <li class="nav-item">
+            <button class="nav-link" (click)="onClick('admin')">Dashboard</button>
+          </li>
+
+          <li class="nav-item">
+            <button class="nav-link" (click)="onClick('listAllPost')">Posts</button>
+          </li>
+
+          <li class="nav-item">
+            <button class="nav-link" (click)="onClick('listAllUsers')">Utilisateurs</button>
+          </li>
+
+        </ul>
+
+        <!-- ✅ Admin Profile Menu -->
+        <div class="admin-info">
+          <i class="fas fa-user-shield avatar-icon"></i>
+          <span class="admin-name">{{ userName }}</span>
         </div>
-    </nav>
+
+        <button class="btn logout-btn" (click)="logOut()">
+          <i class="fas fa-sign-out-alt"></i> Déconnexion
+        </button>
+
+      </div>
+    </div>
+  </nav>
 </div>

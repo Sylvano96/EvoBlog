@@ -1,6 +1,6 @@
 import { CreateServiceService } from './../../Author/Services/create-service.service';
 import { ServiceAdService } from './../Service/service-ad.service';
-import { Component, AfterViewInit, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import {Chart} from 'chart.js/auto'
 import { NavBarAdminComponent } from '../nav-bar-admin/nav-bar-admin.component';
 import { error } from 'console';

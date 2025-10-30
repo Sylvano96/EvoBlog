@@ -1,55 +1,108 @@
 .page-title {
-  font-family: 'Segoe UI', sans-serif;
+  font-size: 26px;
   font-weight: 700;
   text-align: center;
-  margin-bottom: 20px;
-  color: #1b1b1b;
+  margin: 20px 0;
+  color: #2E7D32;
+  text-transform: uppercase;
+}
+
+/* Table */
+.table-responsive {
+  border-radius: 14px;
+  background: #ffffff;
 }
 
 .thead-custom {
-  background: linear-gradient(to right, #004aad, #0074d9);
+  background: #2E7D32 !important;
   color: white;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
 }
 
-table td {
-  background: #f9fafc;
+table td,
+table th {
   border: none;
-  border-bottom: 1px solid #ececec;
+  vertical-align: middle;
 }
 
-.badge {
-  font-size: 0.9rem;
+table tbody tr td {
+  font-size: 15px;
+  color: #333;
+  background: #f8faf9;
 }
 
 .table-hover tbody tr:hover td {
-  background: #eef5ff;
+  background-color: rgba(46,125,50,0.09);
+  transition: .25s ease;
 }
 
+/* Badge */
+.badge.bg-primary {
+  background-color: #1565C0 !important;
+  padding: 5px 10px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* Buttons */
+.btn-outline-primary {
+  border-color: #1565C0;
+  color: #1565C0;
+  border-radius: 8px;
+  transition: .3s;
+}
+
+.btn-outline-primary:hover {
+  background-color: #1565C0;
+  color: white;
+}
+
+.btn-outline-danger {
+  border-radius: 8px;
+  border-color: #D32F2F;
+  color: #D32F2F;
+}
+
+.btn-outline-danger:hover {
+  background: #D32F2F;
+  color: white;
+}
+
+/* Modal Delete */
 .cont-del {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(0,0,0,0.55);
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1050;
 }
 
 .delete-box {
   background: white;
-  border-radius: 12px;
+  border-radius: 14px;
   width: 95%;
   max-width: 420px;
-  overflow: hidden;
+  box-shadow: 0 4px 22px rgba(0,0,0,0.22);
+  animation: zoomIn .3s ease;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
 .delete-header {
-  background: #004aad;
-  color: white;
-  padding: 12px 20px;
+  background: #1565C0;
+  padding: 12px;
+  font-weight: 600;
 }
 
 .delete-text {
-  padding: 20px;
+  padding: 18px;
   font-size: 15px;
   text-align: center;
 }
@@ -58,11 +111,25 @@ table td {
   position: fixed;
   bottom: 15px;
   right: 15px;
+  color: white;
+  background: #2E7D32 !important;
+  border-radius: 10px;
   animation: fadeOut 4s forwards;
 }
 
+/* Animations */
 @keyframes fadeOut {
-  0% {opacity:1;}
-  70% {opacity:1;}
-  100% {opacity:0;}
+  0%, 70% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Mobile Improvements */
+@media (max-width: 768px) {
+  table th,
+  table td {
+    font-size: 13px;
+  }
+  .page-title {
+    font-size: 22px;
+  }
 }

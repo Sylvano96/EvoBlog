@@ -1,25 +1,90 @@
-.navbar {
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    background: #ffffff !important;
+.custom-navbar {
+  background: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  padding: 12px 18px;
+  transition: 0.3s ease;
 }
 
+/* Marque */
 .navbar-brand {
-    font-weight: 700;
-    color: #2E7D32 !important;
+  font-size: 22px;
+  font-weight: 700;
+  cursor: pointer;
+  color: #2E7D32 !important;
 }
 
+/* ADMIN badge */
+.admin-badge {
+  font-size: 12px;
+  color: white;
+  background-color: #2E7D32;
+  padding: 3px 6px;
+  margin-left: 6px;
+  border-radius: 6px;
+}
+
+/* Menu Links */
 .nav-link {
-    font-size: 17px;
-    margin: 0 8px;
-    font-weight: 500;
-    transition: 0.3s;
+  background: transparent;
+  border: none;
+  color: #374151 !important;
+  font-size: 17px;
+  padding: 10px 15px;
+  border-radius: 6px;
+  transition: 0.25s ease-in-out;
 }
 
-.nav-link:hover {
-    color: #1565C0 !important;
+.nav-link:hover,
+.nav-link.active {
+  color: #1565C0 !important;
+  background-color: rgba(21, 101, 192, 0.08);
 }
 
-button.btn-danger {
-    font-size: 16px;
-    border-radius: 8px;
+/* Profil admin */
+.admin-info {
+  display: flex;
+  align-items: center;
+  margin-right: 14px;
+  padding: 8px 12px;
+  background: rgba(46,125,50,0.08);
+  border-radius: 12px;
+}
+
+.avatar-icon {
+  font-size: 20px;
+  color: #2E7D32;
+  margin-right: 6px;
+}
+
+.admin-name {
+  font-weight: 600;
+  color: #2E7D32;
+}
+
+/* Déconnexion button */
+.logout-btn {
+  background-color: #D32F2F;
+  color: white;
+  font-size: 15px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  transition: 0.3s !important;
+}
+
+.logout-btn:hover {
+  background-color: #b71c1c;
+  transform: scale(1.05);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .admin-info {
+    margin: 12px 0;
+    width: 100%;
+    justify-content: center;
+  }
+  .logout-btn {
+    width: 100%;
+    margin-top: 8px;
+  }
 }

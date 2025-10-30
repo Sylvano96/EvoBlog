@@ -1,60 +1,106 @@
-.cont-del{
-    position:fixed;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.486);
-    top: 0;
-    left: 0;
-    display: flex; 
-    justify-content: center; 
+/* Container Globale */
+.container {
+    display: flex;
+    justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    padding: 20px 0;
 }
 
-.card{
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.637);
+/* Card Style */
+.card {
+    background: #ffffff;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    border-radius: 12px;
+    padding: 18px;
     overflow: hidden;
     text-align: center;
-    transition: transform 0.3s ease-in-out;
-    border:none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 420px;
+    width: 100%;
+    border: none;
+}
+
+.card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.22);
+}
+
+/* Image */
+.card img {
+    width: 100%;
+    height: auto;
     border-radius: 10px;
-    position: relative;
-    flex: 1 1 300px;
-    max-width: 400px;
-    width: 100%;
-    padding: 20px;
- }
- 
-/* .card::after{
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 70%;
-    background: linear-gradient(to top, rgba(0,0,0,1), rgba(255,255,255,0));
-    pointer-events: none;
-} */
-
-.card:hover{
-    transform: translateY(-5px);
-}
-.card img{
-    width: 100%;
-    display: block;
+    object-fit: cover;
 }
 
-.title h3{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    position: absolute;
-    left: 50%;
-    bottom: -10px;
-    transform: translateX(-50%);
-    color: white;
-    font-size: 18px;
-    font-family: Arial, Helvetica, sans-serif;
-    padding: 10px 20px;
-    text-align: center;
-    width: 100%;
-    max-width: 100%;
-    z-index: 2;
+/* Titres */
+.card h5 {
+    font-size: 20px;
+    margin-top: 12px;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+/* Accordion */
+.accordion-button {
+    background-color: #f5f7fb !important;
+    color: #333 !important;
+    font-weight: 500;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.accordion-button:hover {
+    background-color: #e1e7f1 !important;
+}
+
+.accordion-item {
+    border: none;
+    margin-bottom: 5px;
+}
+
+.accordion-body {
+    background: #fafafa;
+    border-radius: 5px;
+}
+
+/* Texte dans accordion */
+.accordion-body p {
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: justify;
+    margin: 0;
+}
+
+/* Dates & Status */
+.card div:last-of-type p {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* Status en couleur */
+.card p:nth-child(2) {
+    font-weight: 600;
+}
+
+/* Couleur selon publication */
+.card p:nth-child(2):contains("publié") {
+    color: #007A33;
+}
+.card p:nth-child(2):contains("non publié") {
+    color: #B00020;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .card {
+        max-width: 90%;
+        padding: 15px;
+    }
+    .card h5 {
+        font-size: 18px;
+    }
 }
