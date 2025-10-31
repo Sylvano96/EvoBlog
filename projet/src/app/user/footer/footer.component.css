@@ -1,77 +1,259 @@
-/* Footer principal */
-footer {
-    width: 100%;
-    padding: 25px 20px;
-    background-color: #ffffff; /* même couleur que navbar */
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    font-family: "Segoe UI", sans-serif;
-    border-top: 1px solid #eaeaea;
+/* footer.component.css */
+.footer {
+  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+  border-top: 2px solid #e2e8f0;
+  padding: 3rem 0 1.5rem;
+  margin-top: 4rem;
 }
 
-/* Titres du footer */
-footer h5 {
-    text-align: center;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #222;
-    margin-bottom: 10px;
+.footer-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
-/* Liste des icônes sociales */
-footer .url {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
+/* Content principal */
+.footer-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 2.5rem;
 }
 
-footer .url ul {
-    display: flex;
-    gap: 12px;
-    padding: 0;
-    margin: 0;
+/* Brand Section */
+.footer-brand {
+  max-width: 400px;
 }
 
-footer .url li {
-    list-style: none;
+.brand-name {
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
-footer .url a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 42px;
-    height: 42px;
-    background-color: #f1f1f1;
-    border-radius: 50%;
-    color: #0d6efd;
-    font-size: 18px;
-    transition: all 0.3s ease;
+.brand-text {
+  color: #1e40af;
+  letter-spacing: -0.5px;
 }
 
-footer .url a:hover {
-    background-color: #0d6efd;
-    color: #fff;
-    transform: scale(1.15);
+.brand-accent {
+  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-/* Texte centré en bas */
-footer p {
-    width: 100%;
-    text-align: center;
-    color: #555;
-    font-size: 14px;
-    margin-top: 15px;
+.brand-tagline {
+  color: #64748b;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* Links Section */
+.footer-links h4,
+.footer-social h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 1.25rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footer-links a {
+  color: #64748b;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: #2563eb;
+  transform: translateX(5px);
+}
+
+/* Social Links */
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.social-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.social-btn:hover::before {
+  opacity: 1;
+}
+
+.social-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.social-btn.facebook {
+  background: linear-gradient(135deg, #1877f2 0%, #0c63d4 100%);
+  color: white;
+}
+
+.social-btn.twitter {
+  background: linear-gradient(135deg, #1da1f2 0%, #0d8bd9 100%);
+  color: white;
+}
+
+.social-btn.whatsapp {
+  background: linear-gradient(135deg, #25d366 0%, #1ebe57 100%);
+  color: white;
+}
+
+/* Divider */
+.footer-divider {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+  margin: 2rem 0;
+}
+
+/* Bottom Section */
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 1rem;
+}
+
+.copyright {
+  color: #64748b;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.copyright .highlight {
+  font-weight: 700;
+  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.footer-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.875rem;
+}
+
+.footer-meta a {
+  color: #64748b;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-meta a:hover {
+  color: #2563eb;
+}
+
+.footer-meta .separator {
+  color: #cbd5e1;
 }
 
 /* Responsive */
-@media (max-width: 768px) {
-    footer {
-        flex-direction: column;
-        gap: 15px;
-    }
+@media (max-width: 968px) {
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer {
+    padding: 2.5rem 0 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .footer-container {
+    padding: 0 1.5rem;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-brand {
+    text-align: center;
+  }
+
+  .brand-name {
+    justify-content: center;
+  }
+
+  .footer-links,
+  .footer-social {
+    text-align: center;
+  }
+
+  .footer-links ul {
+    align-items: center;
+  }
+
+  .social-links {
+    justify-content: center;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .footer-meta {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .footer-meta .separator {
+    display: none;
+  }
 }

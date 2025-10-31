@@ -1,37 +1,33 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
-  <div class="container-fluid">
-    <a class="navbar-brand brand mb-2" (click)="onClick('')" role="button">
-      Evo-Blog
+<!-- navbar.component.html -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a class="brand" (click)="onClick('')" role="button">
+      <span class="brand-text">Evo</span><span class="brand-accent">Blog</span>
     </a>
 
     <button 
-      class="navbar-toggler" 
-      type="button" 
-      data-bs-toggle="collapse" 
-      data-bs-target="#navbarMenu" 
-      aria-controls="navbarMenu" 
-      aria-expanded="false" 
+      class="menu-toggle" 
+      (click)="toggleMenu()"
+      [class.active]="isMenuOpen"
       aria-label="Toggle navigation"
     >
-      <span class="navbar-toggler-icon"></span>
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarMenu">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-links">
-        <li class="nav-item">
-          <a class="nav-link" href="#home">Accueil</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#posts">Posts récents</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#actualityPost">Fil d’actualités</a>
-        </li>
+    <div class="nav-menu" [class.active]="isMenuOpen">
+      <ul class="nav-links">
+        <li><a href="#home" (click)="closeMenu()">Accueil</a></li>
+        <li><a href="#posts" (click)="closeMenu()">Posts récents</a></li>
+        <li><a href="#actualityPost" (click)="closeMenu()">Fil d'actualités</a></li>
       </ul>
 
-      <button class="btn btn-primary login-btn" (click)="onClick('/author')">
-        Se connecter 
-        <i class="fas fa-arrow-right ms-2"></i>
+      <button class="login-btn" (click)="onClick('/author')">
+        <span>Se connecter</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
       </button>
     </div>
   </div>

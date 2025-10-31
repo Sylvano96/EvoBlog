@@ -13,6 +13,16 @@ export class NavBarComponent {
 
   constructor(public GoToAnotherPageService : GoToAnotherPageService, private AuthService: AuthService){}
 
+  isMenuOpen : boolean = false;
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  closeMenu() {
+    this.isMenuOpen = false;
+  }
+  
   onClick(url:string){
     return this.GoToAnotherPageService.goToAnotherPage(url)
   }

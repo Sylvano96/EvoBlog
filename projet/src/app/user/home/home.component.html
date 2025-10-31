@@ -1,46 +1,122 @@
+<!-- home.component.html -->
 <app-nav-bar></app-nav-bar>
 
-<div class="home-container container">
-  <div class="intro-section">
-    
-    <div class="text-content">
-      <h1>Bienvenue 👋</h1>
-      <p class="subtitle">
-        Plonge au cœur de l’innovation technologique et partage tes idées avec une communauté passionnée.
-      </p>
-      <p class="description">
-        Articles, projets, inspirations... Découvre, crée, et connecte-toi avec le monde du numérique !
-      </p>
-    </div>
+<div class="home-wrapper">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-content">
+        
+        <div class="text-content">
+          <div class="hero-badge">
+            <span>✨ Nouvelle plateforme</span>
+          </div>
+          
+          <h1 class="hero-title">
+            Bienvenue sur <span class="gradient-text">Evo-Blog</span>
+          </h1>
+          
+          <p class="hero-subtitle">
+            Plonge au cœur de l'innovation technologique et partage tes idées avec une communauté passionnée.
+          </p>
+          
+          <p class="hero-description">
+            Articles, projets, inspirations... Découvre, crée, et connecte-toi avec le monde du numérique !
+          </p>
 
-    <div class="image-wrapper">
-      <img [src]="img" alt="Tech image" />
-    </div>
+          <div class="cta-buttons">
+            <a class="btn-primary" href="/signUp">
+              <span>Rejoindre la communauté</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
 
-  </div>
+          <div class="stats">
+            <div class="stat-item">
+              <span class="stat-number">500+</span>
+              <span class="stat-label">Articles</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">1K+</span>
+              <span class="stat-label">Membres</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">50+</span>
+              <span class="stat-label">Catégories</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="image-content">
+          <div class="image-wrapper">
+            <div class="image-decoration decoration-1"></div>
+            <div class="image-decoration decoration-2"></div>
+            <img [src]="img" alt="Innovation technologique" />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Pourquoi nous rejoindre ?</h2>
+        <p class="section-subtitle">Découvre tous les avantages de notre plateforme</p>
+      </div>
+
+      <div class="features-grid">
+        
+        <div class="feature-card">
+          <div class="feature-icon blue">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+              <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Apprendre</h3>
+          <p class="feature-description">
+            Explore les dernières nouveautés tech et améliore tes compétences avec des contenus de qualité.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon purple">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+              <path d="M2 17l10 5 10-5"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Partager</h3>
+          <p class="feature-description">
+            Publie tes projets, exprime tes idées et inspire la communauté avec ton expertise.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon cyan">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Connecter</h3>
+          <p class="feature-description">
+            Rencontre des passionnés comme toi et collabore sur des projets innovants.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <app-posts></app-posts>
+  <app-footer></app-footer>
 </div>
-
-<section class="features-section container">
-  <h2 class="text-center mb-5">Pourquoi nous rejoindre ?</h2>
-  <div class="features-list">
-
-    <div class="feature-card">
-      <h3>🧠 Apprendre</h3>
-      <p>Explore les dernières nouveautés tech et améliore tes compétences.</p>
-    </div>
-
-    <div class="feature-card">
-      <h3>💡 Partager</h3>
-      <p>Publie tes projets, exprime tes idées, inspire la communauté.</p>
-    </div>
-
-    <div class="feature-card">
-      <h3>🤝 Connecter</h3>
-      <p>Rencontre des passionnés comme toi et collabore sur des projets innovants.</p>
-    </div>
-
-  </div>
-</section>
-
-<app-posts></app-posts>
-<app-footer></app-footer>

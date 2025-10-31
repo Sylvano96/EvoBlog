@@ -1,66 +1,110 @@
-<div id="posts">
-    <div style="padding: 0 40px;">
-        <div>
-            <h3 class="my-2 ph">Les posts récents</h3>
-        </div>
-        <div class="container-1">
-            <div *ngFor="let item of dataRecent">
-                <div class="card my-2" (click)="onClick(item.id)">
-                    <img [src]="'http://localhost:8080/images/'+item.image" alt="">
-                    <div class="title">
-                        <h3>{{item.title}}</h3>
-                    </div>
-                </div>
+<!-- posts.component.html -->
+<div id="posts" class="posts-wrapper">
+  
+  <!-- Section Posts Récents -->
+  <section class="recent-posts-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="title-icon">🔥</span>
+          Les posts récents
+        </h2>
+      </div>
+
+      <!-- Grille des posts récents -->
+      <div class="posts-grid recent-grid" *ngIf="dataRecent.length > 0">
+        <div *ngFor="let item of dataRecent" class="post-card-wrapper">
+          <div class="post-card" (click)="onClick(item.id)">
+            <div class="post-image">
+              <img [src]="'http://localhost:8080/images/'+item.image" [alt]="item.title">
+              <div class="post-overlay"></div>
             </div>
-        </div>
-        <div *ngIf="dataRecent.length == 0" class="comment my-2" style="padding: 5px; box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.438); background-color: white; border-radius: 10px;">
-            <div class="my-2" style="text-align: center; word-wrap: break-word;">
-                <p style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Pas de récents posts pour le moment ...</p>
+            <div class="post-content">
+              <h3 class="post-title">{{item.title}}</h3>
             </div>
+          </div>
         </div>
+      </div>
+
+      <!-- Message si aucun post -->
+      <div *ngIf="dataRecent.length == 0" class="empty-state">
+        <div class="empty-icon">📝</div>
+        <p>Pas de posts récents pour le moment...</p>
+      </div>
     </div>
-    <div id="actualityPost">
-        <div>
-            <h3 class="py-3 ph" style="margin-left: 30px;">Les actualités</h3>
-        </div>
-        <div *ngIf="dataRecent.length == 0" class="comment my-2 container" style="padding: 5px; box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.438); background-color: white; border-radius: 10px;">
-            <div class="my-2" style="text-align: center; word-wrap: break-word;">
-                <p style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Pas de récents posts pour le moment ...</p>
-            </div>
-        </div>
-        <div class="all">
-            <div class="container-2">
-                <div *ngFor="let item of data | paginate :{itemsPerPage : itemsPerPage, currentPage : currentPage}">
-                    <div class="card2" (click)="onClick(item.id)">
-                        <img [src]="'http://localhost:8080/images/'+item.image" alt="">
-                        <div class="title">
-                            <h3>{{item.title}}</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="sticky-wraper">
-                <div>
-                    <div class="sticky-element">
-                        <h5 style="text-align: center;">Domaine de la Technologie et Société</h5>
-                        <div *ngFor="let item of dataTech">
-                            <div class="card1 my-2" (click)="onClick(item.id)">
-                                <div style="padding: 5px;">
-                                    <img [src]="'http://localhost:8080/images/'+item.image" alt="">
-                                </div>
-                                <div class="titleS">
-                                    <h3>{{item.title}}</h3>
-                                    <div class="info"><p>{{item.createdAt | date:'dd/MM/yyyy HH:mm:s'}}</p></div>
-                                </div>
-                            </div>
-                        </div>
-        
-                    </div>
-                </div>
-            </div>
-        </div>
+  </section>
+
+  <!-- Section Actualités -->
+  <section id="actualityPost" class="actuality-section">
+    <div class="section-header">
+      <h2 class="section-title">
+        <span class="title-icon">📰</span>
+        Fil d'actualités
+      </h2>
     </div>
-    <div  class=" my-3">
-        <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+
+    <div class="actuality-layout">
+      
+      <!-- Grille principale des actualités -->
+      <div class="actuality-main">
+        <div *ngIf="data.length == 0" class="empty-state">
+          <div class="empty-icon">📝</div>
+          <p>Pas d'actualités pour le moment...</p>
+        </div>
+
+        <div class="posts-grid actuality-grid" *ngIf="data.length > 0">
+          <div *ngFor="let item of data | paginate :{itemsPerPage : itemsPerPage, currentPage : currentPage}" class="post-card-wrapper">
+            <div class="post-card actuality-card" (click)="onClick(item.id)">
+              <div class="post-image">
+                <img [src]="'http://localhost:8080/images/'+item.image" [alt]="item.title">
+                <div class="post-overlay"></div>
+              </div>
+              <div class="post-content">
+                <h3 class="post-title">{{item.title}}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar sticky -->
+      <aside class="sidebar-sticky">
+        <div class="sidebar-content">
+          <div class="sidebar-header">
+            <h3>
+              <span class="sidebar-icon">💻</span>
+              Technologie & Société
+            </h3>
+          </div>
+
+          <div class="sidebar-posts">
+            <div *ngFor="let item of dataTech" class="sidebar-card" (click)="onClick(item.id)">
+              <div class="sidebar-image">
+                <img [src]="'http://localhost:8080/images/'+item.image" [alt]="item.title">
+              </div>
+              <div class="sidebar-info">
+                <h4>{{item.title}}</h4>
+                <p class="sidebar-date">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/>
+                    <line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                  </svg>
+                  {{item.createdAt | date:'dd/MM/yyyy HH:mm'}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
     </div>
+
+    <!-- Pagination -->
+    <div class="pagination-wrapper">
+      <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+    </div>
+  </section>
+
 </div>
