@@ -72,11 +72,16 @@
     <!-- 🧩 Articles similaires -->
     <section class="related-posts">
       <h3>Articles similaires</h3>
-      <div *ngIf="sameCategoryData.length !== 0" class="card-container">
-        <div *ngFor="let item of sameCategoryData" class="card" (click)="changeData(item.id)">
-          <img [src]="'http://localhost:8080/images/' + item.image" alt="{{ item.title }}">
-          <div class="card-title">
-            <h3>{{ item.title }}</h3>
+      <div class="posts-grid recent-grid" *ngIf="sameCategoryData.length > 0">
+        <div *ngFor="let item of sameCategoryData" class="post-card-wrapper">
+          <div class="post-card" (click)="changeData(item.id)">
+            <div class="post-image">
+              <img [src]="'http://localhost:8080/images/'+item.image" [alt]="item.title">
+              <div class="post-overlay"></div>
+            </div>
+            <div class="post-content">
+              <h3 class="post-title">{{item.title}}</h3>
+            </div>
           </div>
         </div>
       </div>
@@ -88,11 +93,16 @@
     <!-- 🕒 Posts récents -->
     <section class="recent-posts">
       <h3>Les posts récents</h3>
-      <div class="card-container">
-        <div *ngFor="let item of actualityData" class="card" (click)="changeData(item.id)">
-          <img [src]="'http://localhost:8080/images/' + item.image" alt="{{ item.title }}">
-          <div class="card-title">
-            <h3>{{ item.title }}</h3>
+      <div class="posts-grid recent-grid" *ngIf="actualityData.length > 0">
+        <div *ngFor="let item of actualityData" class="post-card-wrapper">
+          <div class="post-card" (click)="changeData(item.id)">
+            <div class="post-image">
+              <img [src]="'http://localhost:8080/images/'+item.image" [alt]="item.title">
+              <div class="post-overlay"></div>
+            </div>
+            <div class="post-content">
+              <h3 class="post-title">{{item.title}}</h3>
+            </div>
           </div>
         </div>
       </div>
