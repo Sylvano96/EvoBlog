@@ -59,4 +59,9 @@ public interface PostRepository extends JpaRepository<posts, Long> {
     @Query(value="SELECT * FROM posts "+"FULL OUTER JOIN comments ON posts.id = comments.post_id "+
      "ORDER BY posts.created_at DESC", nativeQuery=true)
     List <Object[]> getAllPostsWithComments();
+
+     @Query(value="SELECT * FROM posts "+"FULL OUTER JOIN comments ON posts.id = comments.post_id "+
+     "WHERE posts.user_id=:id "+" ORDER BY posts.created_at DESC", nativeQuery=true)
+    List <Object[]> getAllPostsForOnAuthorWithComments(@Param("id") Integer id);
+    
 }

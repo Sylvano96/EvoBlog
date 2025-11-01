@@ -125,6 +125,12 @@ public class mainControllers {
         return postServices.gestAllPostsWithComment();
     } 
 
+    @GetMapping("/api/{id}/userPostsWithComments")
+    public List<Object[]> userPostsWithComments(@PathVariable Integer id){
+        return postServices.getAllPostsForOnAuthorWithComments(id);
+    }
+
+
     /***************************************** USERS ***************************************************/
 
     @GetMapping("/api/allUsers")
