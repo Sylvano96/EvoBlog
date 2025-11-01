@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.SpringBoot.Entities.posts;
 import com.example.SpringBoot.Interfaces.PostRepository;
+import com.example.SpringBoot.Interfaces.CommentRepository;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -17,6 +18,9 @@ public class PostServices {
 
     @Autowired
     private PostRepository postRepository;
+
+    @Autowired
+    private CommentRepository commentRepository;
 
     private String uploadDir = "D:/L3/ProjetSpring/images/";
 
@@ -66,6 +70,10 @@ public class PostServices {
 
     public List<posts> getAllPosts() {
         return postRepository.findAllByOrderByCreatedAtDesc();
+    }
+
+    public List <Object[]> gestAllPostsWithComment(){
+        return postRepository.getAllPostsWithComments();
     }
 
     public Optional<posts> getOnePost(Long id) {

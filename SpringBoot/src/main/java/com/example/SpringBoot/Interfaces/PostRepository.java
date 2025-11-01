@@ -54,4 +54,9 @@ public interface PostRepository extends JpaRepository<posts, Long> {
     @Query(value="SELECT posts.category,posts.image,posts.status, posts.title, posts.contents,posts.created_at, users.name, users.last_name  FROM posts "+"FULL OUTER JOIN users ON users.id = posts.user_id "+
      "WHERE posts.status='publié' ORDER BY posts.created_at DESC", nativeQuery=true)
     List <Object[]> findPosts();
+
+
+    @Query(value="SELECT * FROM posts "+"FULL OUTER JOIN comments ON posts.id = comments.post_id "+
+     "ORDER BY posts.created_at DESC", nativeQuery=true)
+    List <Object[]> getAllPostsWithComments();
 }

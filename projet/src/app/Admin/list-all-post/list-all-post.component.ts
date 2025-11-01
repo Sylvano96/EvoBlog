@@ -40,6 +40,12 @@ export class ListAllPostComponent {
       console.log("Erreur de récuperation des auteurs avec les nombres du posts: ", error)
     })
 
+    this.ServiceAdService.getAllPostsWithComments().subscribe((data) => {
+      console.log("Données azo : ",data);
+    }, error => {
+      console.log("Erreur de récuperation des auteurs avec les nombres du posts: ", error)
+    })
+
     
 
     // this.ServiceAdService.getAllPostsForUsers().subscribe((data) => {

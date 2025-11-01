@@ -120,6 +120,11 @@ public class mainControllers {
     } 
 
 
+    @GetMapping("/api/allPostsWithComments")
+    public List<Object[]> getAllPostsWithComments(){
+        return postServices.gestAllPostsWithComment();
+    } 
+
     /***************************************** USERS ***************************************************/
 
     @GetMapping("/api/allUsers")

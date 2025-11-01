@@ -48,5 +48,9 @@ export class ServiceAdService {
     return this.http.get(this.url + value + '/searchPosts')
   }
 
+  getAllPostsWithComments(): Observable<any[]> {
+    return this.http.get<any[]>(this.url + 'allPostsWithComments')
+  }
+
   //
 }
