@@ -1,28 +1,91 @@
-<div style="position: absolute; top: 10px; left: 20px; font-size: 15px;">
-    <a href="/" style="font-family: cursive; font-weight: bold; text-decoration: none; color: black;" class="back"><i class="fas fa-angles-left"></i>  Retour à l'accueil</a>
-</div>
-<div class="container">
-    <div style="display: flex;justify-content: center;flex-wrap: wrap; align-items: center; height: 100vh; ">
-        <div style="display: flex; justify-content: center;flex-wrap: wrap;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.237);padding: 20px 25px; border-radius: 15px; background-color: rgb(255, 255, 255); align-items: center;">
-            <div>
-                <img style="width: 100%; max-width: 500px; border-radius: 20px;" src="/assets/email-verification-concept-receiving-incoming-email-sending-and-receiving-verification-emails-can-be-used-for-web-pages-banners-mobile-apps-flat-illustration-on-background-vector.jpg" alt="">
-            </div>
-            <section>
-                <p style="display: block;width: 400px; text-align: center; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 20px; word-wrap: break-word;">
-                    Nous avons envoyer un email à vous, Veuillez consulter cet email et
-                    saisir votre code de validation en bas afin de finaliser votre inscription
-                    chez Evo-Blog. 
-                </p>
-                <form action="" style="display: block;" [formGroup]="validate">
-                    <input type="text" class="form-control my-3" name="value" formControlName="value">
-                    <div *ngIf="validate.get('value')?.touched && validate.get('value')?.hasError('required')" >
-                        <p style="color: red; font-size: 15px; font-family: cursive; font-weight: bold;">Veuillez compléter le champ vide</p>
-                    </div>
-                    <div style="display: flex; justify-content: flex-end;">
-                        <button class="btn btn-primary my-2" (click)="submit()">Valider mon code</button>
-                    </div>
-                </form>
-            </section>
+<!-- verification.component.html -->
+<div class="verification-page">
+  
+  <!-- Bouton retour -->
+  <div class="back-button">
+    <a href="/" class="back-link">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      <span>Retour à l'accueil</span>
+    </a>
+  </div>
+
+  <!-- Container principal -->
+  <div class="verification-container">
+    <div class="verification-card">
+      
+      <!-- Image illustration -->
+      <div class="verification-image">
+        <img src="/assets/email-verification-concept-receiving-incoming-email-sending-and-receiving-verification-emails-can-be-used-for-web-pages-banners-mobile-apps-flat-illustration-on-background-vector.jpg" alt="Email verification">
+      </div>
+
+      <!-- Section formulaire -->
+      <div class="verification-content">
+        
+        <!-- Header avec icône -->
+        <div class="verification-header">
+          <div class="icon-wrapper">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <h2>Vérification de votre email</h2>
         </div>
+
+        <!-- Message d'instructions -->
+        <p class="verification-message">
+          Nous avons envoyé un code de vérification à votre adresse email. 
+          Veuillez consulter votre boîte de réception et saisir le code ci-dessous 
+          pour finaliser votre inscription sur <span class="highlight">Evo-Blog</span>.
+        </p>
+
+        <!-- Formulaire -->
+        <form [formGroup]="validate" class="verification-form">
+          
+          <div class="form-group">
+            <label for="code">Code de vérification</label>
+            <input 
+              type="text" 
+              id="code"
+              class="form-input" 
+              formControlName="value"
+              placeholder="Entrez votre code"
+              [class.error]="validate.get('value')?.touched && validate.get('value')?.hasError('required')"
+            >
+            
+            <div class="error-message" 
+                 *ngIf="validate.get('value')?.touched && validate.get('value')?.hasError('required')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="12"/>
+                <line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
+              <span>Veuillez saisir votre code de vérification</span>
+            </div>
+          </div>
+
+          <button type="button" class="submit-btn" (click)="submit()">
+            <span>Valider mon code</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 11 12 14 22 4"/>
+              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+            </svg>
+          </button>
+
+          <!-- Lien renvoyer le code -->
+          <div class="resend-link">
+            <p>Vous n'avez pas reçu le code ? 
+              <a href="#" class="link">Renvoyer le code</a>
+            </p>
+          </div>
+
+        </form>
+
+      </div>
+
     </div>
+  </div>
+
 </div>

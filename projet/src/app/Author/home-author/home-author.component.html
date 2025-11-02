@@ -1,54 +1,133 @@
-<app-nav></app-nav>
+<!-- author-page.component.html -->
+<div class="author-page">
+  <app-nav></app-nav>
 
-<section class="author-hero container">
-  <div class="author-profile">
-    <div class="profile-image">
-      <img [src]="img" alt="Auteur">
-    </div>
-
-    <div class="profile-content">
-      <h2>Bienvenue, Cher Auteur ✍️</h2>
-      <p class="quote">
-        “Écrire, c’est partager une part de soi avec le monde. 
-        Le blogging transforme des idées en impact et des histoires en connexions.”
-      </p>
-
-      <button class="btn btn-primary open-stats"
-              data-bs-toggle="modal" 
-              data-bs-target="#exampleModal">
-        Voir mes statistiques 📊
-      </button>
-    </div>
-  </div>
-</section>
-
-<!-- ✅ Modal amélioré -->
-<div class="modal fade" id="exampleModal" tabindex="-1">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h5 class="modal-title">Résumé de vos publications</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-
-      <div class="modal-body">
-        <div class="stats-cards">
-          <div class="stat-card stat-published">
-            <span class="label">Publiés ✅</span>
-            <span class="value">200</span>
-          </div>
-          <div class="stat-card stat-unpublished">
-            <span class="label">Non publiés 🕓</span>
-            <span class="value">123</span>
-          </div>
+  <!-- Hero Section -->
+  <section class="author-hero">
+    <div class="hero-container">
+      
+      <div class="hero-content">
+        
+        <!-- Profile Image -->
+        <div class="profile-image-wrapper">
+          <div class="image-decoration"></div>
+          <img [src]="img" alt="Photo de l'auteur" class="profile-image">
         </div>
 
-        <div class="chart-container">
-          <canvas #chartCanvas></canvas>
+        <!-- Profile Content -->
+        <div class="profile-content">
+          <div class="welcome-badge">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            <span>Espace Auteur</span>
+          </div>
+
+          <h1 class="hero-title">
+            Bienvenue, <span class="highlight">Cher Auteur</span> ✍️
+          </h1>
+
+          <blockquote class="hero-quote">
+            <svg class="quote-icon" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
+            </svg>
+            <p>
+              "Écrire, c'est partager une part de soi avec le monde. 
+              Le blogging transforme des idées en impact et des histoires en connexions."
+            </p>
+          </blockquote>
+
+          <button 
+            class="stats-btn"
+            data-bs-toggle="modal" 
+            data-bs-target="#exampleModal"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="20" x2="18" y2="10"/>
+              <line x1="12" y1="20" x2="12" y2="4"/>
+              <line x1="6" y1="20" x2="6" y2="14"/>
+            </svg>
+            <span>Voir mes statistiques</span>
+          </button>
+
         </div>
+
       </div>
 
     </div>
+  </section>
+
+  <!-- Modal Statistiques -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content custom-modal">
+
+        <div class="modal-header">
+          <div class="modal-title-wrapper">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 3v18h18"/>
+              <path d="M18 17V9"/>
+              <path d="M13 17V5"/>
+              <path d="M8 17v-3"/>
+            </svg>
+            <h5 class="modal-title">Résumé de vos publications</h5>
+          </div>
+          <button type="button" class="btn-close-custom" data-bs-dismiss="modal" aria-label="Close">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"/>
+              <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          
+          <!-- Stats Cards -->
+          <div class="stats-grid">
+            <div class="stat-card published">
+              <div class="stat-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </div>
+              <div class="stat-info">
+                <span class="stat-label">Publiés</span>
+                <span class="stat-value">200</span>
+              </div>
+            </div>
+
+            <div class="stat-card unpublished">
+              <div class="stat-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+              <div class="stat-info">
+                <span class="stat-label">Non publiés</span>
+                <span class="stat-value">123</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chart Container -->
+          <div class="chart-section">
+            <h6 class="chart-title">Évolution des publications</h6>
+            <div class="chart-container">
+              <canvas #chartCanvas></canvas>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary-custom" data-bs-dismiss="modal">
+            Fermer
+          </button>
+        </div>
+
+      </div>
+    </div>
   </div>
+
 </div>

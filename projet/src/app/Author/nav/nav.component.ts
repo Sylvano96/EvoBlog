@@ -24,6 +24,12 @@ export class NavComponent implements OnInit {
     this.router.navigate(["/login"])
   }
 
+  isMenuOpen : boolean = false;
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
   
 
   onClick(url : string){

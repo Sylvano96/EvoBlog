@@ -1,42 +1,200 @@
-<app-nav-bar></app-nav-bar>
+<!-- signup.component.html -->
+<div class="signup-page">
+  <app-nav-bar></app-nav-bar>
 
-<div style="display: flex; justify-content: center; margin:20px 0;">
-    <div style="display: flex;justify-content: center;flex-wrap: wrap; align-items: center;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.237);padding: 20px 25px; border-radius: 15px; background-color: rgb(255, 255, 255); ">
-        <div>
-            <img src="/assets/istockphoto-1429201424-612x612.jpg" alt="" style="width: 100%; max-width: 600px; border-radius: 20px;">
-        </div>
-        <form class="p-4" [formGroup]="formulaire" style="width: 450px;">
-            <h5  style="font-size: 1.5rem;">S'inscrire à Evo-blog</h5>
-            <p class=" my-4" style="font-size: 1.1rem; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; ">Veuillez remplir le formulaire en bas pour s'inscrire</p>
-            
-            <label for="" style="font-size: 1.0rem; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Nom :</label>
-            <input type="text"  class="form-control my-3" name="name" formControlName="name"> 
-            <div *ngIf="formulaire.get('name')?.touched && formulaire.get('name')?.hasError('required')" class="text-center">
-                <p style="color: red;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Champ nom vide</p>
-            </div> 
-
-            <label for="" style="font-size: 1.0rem; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Prénom(s) :</label>
-            <input type="text"  class="form-control my-3" name="lastName" formControlName="lastName"> 
-
-            <label for="" style="font-size: 1.0rem; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Email :</label>
-            <input type="email"  class="form-control my-3" name="email" formControlName="email"> 
-            <div *ngIf="formulaire.get('email')?.touched && formulaire.get('email')?.hasError('required')" class="text-center">
-                <p style="color: red;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Champ email vide</p>
-            </div> 
-            <label for="" style="font-size: 1.0rem; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Mot de passe :</label>
-            <input type="password" class="form-control my-3" name="password" formControlName="password">
-            <div *ngIf="formulaire.get('password')?.touched && formulaire.get('password')?.hasError('required')" class="text-center">
-                <p style="color: red;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Champ mot de passe</p>
-            </div> 
-            <div style="display: flex; justify-content: flex-end; align-items: center;">
-                <a href="/login" class="mx-2" style="text-decoration: none; font-size: 1.0rem; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Se connecter sur un compte ?</a>
-                <button class="btn btn-primary" (click)="submit()">Connexion</button>
+  <div class="signup-wrapper">
+    <div class="signup-container">
+      
+      <div class="signup-card">
+        
+        <!-- Section Image -->
+        <div class="signup-image">
+          <div class="image-overlay">
+            <div class="welcome-text">
+              <h2>Rejoignez <span class="brand-highlight">Evo-Blog</span></h2>
+              <p>Créez votre compte et commencez à partager vos idées avec notre communauté</p>
+              <div class="features-list">
+                <div class="feature-item">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  <span>Accès illimité</span>
+                </div>
+                <div class="feature-item">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  <span>Publiez vos articles</span>
+                </div>
+                <div class="feature-item">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  <span>Communauté active</span>
+                </div>
+              </div>
             </div>
-            
-        </form>
-    </div>
-</div>
+          </div>
+          <img src="/assets/istockphoto-1429201424-612x612.jpg" alt="Sign up illustration">
+        </div>
 
-<div *ngIf="errorCreate" class="alert alert-warning text-center" style="position:fixed; bottom: 10px; right:10px;">
-    Erreur d'envoie, {{errorMess}} .
+        <!-- Section Formulaire -->
+        <div class="signup-form-section">
+          
+          <div class="form-header">
+            <div class="header-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="8.5" cy="7" r="4"/>
+                <line x1="20" y1="8" x2="20" y2="14"/>
+                <line x1="23" y1="11" x2="17" y2="11"/>
+              </svg>
+            </div>
+            <h1>Créer un compte</h1>
+            <p class="subtitle">Rejoignez notre plateforme en quelques clics</p>
+          </div>
+
+          <form [formGroup]="formulaire" class="signup-form">
+            
+            <!-- Nom Field -->
+            <div class="form-group">
+              <label for="name">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                  <circle cx="12" cy="7" r="4"/>
+                </svg>
+                Nom
+              </label>
+              <input 
+                type="text" 
+                id="name"
+                class="form-input" 
+                formControlName="name"
+                placeholder="Votre nom"
+                [class.error]="formulaire.get('name')?.touched && formulaire.get('name')?.hasError('required')"
+              >
+              <div class="error-message" 
+                   *ngIf="formulaire.get('name')?.touched && formulaire.get('name')?.hasError('required')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="12" y1="8" x2="12" y2="12"/>
+                  <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+                <span>Veuillez saisir votre nom</span>
+              </div>
+            </div>
+
+            <!-- Prénom Field -->
+            <div class="form-group">
+              <label for="lastName">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                  <circle cx="12" cy="7" r="4"/>
+                </svg>
+                Prénom(s)
+              </label>
+              <input 
+                type="text" 
+                id="lastName"
+                class="form-input" 
+                formControlName="lastName"
+                placeholder="Votre(s) prénom(s)"
+              >
+            </div>
+
+            <!-- Email Field -->
+            <div class="form-group">
+              <label for="email">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+                Adresse email
+              </label>
+              <input 
+                type="email" 
+                id="email"
+                class="form-input" 
+                formControlName="email"
+                placeholder="exemple@email.com"
+                [class.error]="formulaire.get('email')?.touched && formulaire.get('email')?.hasError('required')"
+              >
+              <div class="error-message" 
+                   *ngIf="formulaire.get('email')?.touched && formulaire.get('email')?.hasError('required')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="12" y1="8" x2="12" y2="12"/>
+                  <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+                <span>Veuillez saisir votre adresse email</span>
+              </div>
+            </div>
+
+            <!-- Password Field -->
+            <div class="form-group">
+              <label for="password">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+                Mot de passe
+              </label>
+              <input 
+                type="password" 
+                id="password"
+                class="form-input" 
+                formControlName="password"
+                placeholder="••••••••"
+                [class.error]="formulaire.get('password')?.touched && formulaire.get('password')?.hasError('required')"
+              >
+              <div class="error-message" 
+                   *ngIf="formulaire.get('password')?.touched && formulaire.get('password')?.hasError('required')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="12" y1="8" x2="12" y2="12"/>
+                  <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+                <span>Veuillez saisir votre mot de passe</span>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="button" class="submit-btn" (click)="submit()">
+              <span>Créer mon compte</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </button>
+
+            <!-- Login Link -->
+            <div class="login-link">
+              <p>Vous avez déjà un compte ? 
+                <a href="/login">Se connecter</a>
+              </p>
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Alert d'erreur -->
+  <div *ngIf="errorCreate" class="error-toast">
+    <div class="toast-content">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="8" x2="12" y2="12"/>
+        <line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+      <div class="toast-text">
+        <strong>Erreur</strong>
+        <p>{{errorMess}}</p>
+      </div>
+    </div>
+  </div>
+
 </div>

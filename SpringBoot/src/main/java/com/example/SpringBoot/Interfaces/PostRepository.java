@@ -56,7 +56,7 @@ public interface PostRepository extends JpaRepository<posts, Long> {
     List <Object[]> findPosts();
 
 
-    @Query(value="SELECT * FROM posts "+"FULL OUTER JOIN comments ON posts.id = comments.post_id "+
+    @Query(value="SELECT posts.comments FROM posts "+"FULL OUTER JOIN comments ON posts.id = comments.post_id "+
      "ORDER BY posts.created_at DESC", nativeQuery=true)
     List <Object[]> getAllPostsWithComments();
 
