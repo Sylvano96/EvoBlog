@@ -1,52 +1,165 @@
-<app-nav-bar-admin></app-nav-bar-admin>
+<!-- admin-dashboard.component.html -->
+<div class="admin-page">
+  <app-nav-bar-admin></app-nav-bar-admin>
 
-<div class="admin-container container my-4">
-
-  <h2 class="title">Tableau de Bord</h2>
-
-  <div class="stats-grid">
-    <div class="stat-card published">
-      <div class="icon"><i class="fas fa-check-circle"></i></div>
-      <div>
-        <p class="label">Total Publiés</p>
-        <p class="value">{{nbPublie}}</p>
+  <div class="admin-container">
+    
+    <!-- Header Section -->
+    <div class="dashboard-header">
+      <div class="header-content">
+        <h1 class="dashboard-title">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"/>
+            <rect x="14" y="3" width="7" height="7"/>
+            <rect x="14" y="14" width="7" height="7"/>
+            <rect x="3" y="14" width="7" height="7"/>
+          </svg>
+          Tableau de Bord
+        </h1>
+        <p class="dashboard-subtitle">Vue d'ensemble des statistiques de la plateforme</p>
       </div>
     </div>
 
-    <div class="stat-card not-published">
-      <div class="icon"><i class="fas fa-times-circle"></i></div>
-      <div>
-        <p class="label">Non Publiés</p>
-        <p class="value">{{nbNonPublie}}</p>
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+      
+      <!-- Card Publiés -->
+      <div class="stat-card published">
+        <div class="card-header">
+          <div class="icon-wrapper">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+          </div>
+          <span class="trend-badge positive">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="18 15 12 9 6 15"/>
+            </svg>
+            12%
+          </span>
+        </div>
+        <div class="card-body">
+          <p class="label">Total Publiés</p>
+          <p class="value">{{nbPublie}}</p>
+          <p class="description">Articles en ligne</p>
+        </div>
+      </div>
+
+      <!-- Card Non Publiés -->
+      <div class="stat-card unpublished">
+        <div class="card-header">
+          <div class="icon-wrapper">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <span class="trend-badge neutral">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            0%
+          </span>
+        </div>
+        <div class="card-body">
+          <p class="label">Non Publiés</p>
+          <p class="value">{{nbNonPublie}}</p>
+          <p class="description">En attente de validation</p>
+        </div>
+      </div>
+
+      <!-- Card Posts Total -->
+      <div class="stat-card total">
+        <div class="card-header">
+          <div class="icon-wrapper">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+              <line x1="12" y1="22.08" x2="12" y2="12"/>
+            </svg>
+          </div>
+          <span class="trend-badge positive">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="18 15 12 9 6 15"/>
+            </svg>
+            8%
+          </span>
+        </div>
+        <div class="card-body">
+          <p class="label">Posts Enregistrés</p>
+          <p class="value">{{nbPublie + nbNonPublie}}</p>
+          <p class="description">Total dans la base</p>
+        </div>
+      </div>
+
+      <!-- Card Rédacteurs -->
+      <div class="stat-card writers">
+        <div class="card-header">
+          <div class="icon-wrapper">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <span class="trend-badge positive">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="18 15 12 9 6 15"/>
+            </svg>
+            5%
+          </span>
+        </div>
+        <div class="card-body">
+          <p class="label">Rédacteurs</p>
+          <p class="value">{{nbRedac}}</p>
+          <p class="description">Auteurs actifs</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Charts Section -->
+    <div class="charts-section">
+      <h2 class="section-title">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="20" x2="18" y2="10"/>
+          <line x1="12" y1="20" x2="12" y2="4"/>
+          <line x1="6" y1="20" x2="6" y2="14"/>
+        </svg>
+        Statistiques Détaillées
+      </h2>
+
+      <div class="charts-grid">
+        
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3>Publications par mois</h3>
+            <div class="chart-actions">
+              <button class="chart-btn active">6M</button>
+              <button class="chart-btn">1A</button>
+            </div>
+          </div>
+          <div class="chart-container">
+            <canvas id="canvas"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3>Répartition des catégories</h3>
+            <div class="chart-actions">
+              <button class="chart-btn active">Vue</button>
+            </div>
+          </div>
+          <div class="chart-container">
+            <canvas #chartCanvas></canvas>
+          </div>
+        </div>
+
       </div>
     </div>
 
-    <div class="stat-card posts-saved">
-      <div class="icon"><i class="fas fa-database"></i></div>
-      <div>
-        <p class="label">Posts Enregistrés</p>
-        <p class="value">{{nbPublie + nbNonPublie}}</p>
-      </div>
-    </div>
-
-    <div class="stat-card writers">
-      <div class="icon"><i class="fas fa-user-edit"></i></div>
-      <div>
-        <p class="label">Rédacteurs</p>
-        <p class="value">{{nbRedac}}</p>
-      </div>
-    </div>
   </div>
-
-  <h3 class="title mt-4">Statistiques</h3>
-
-  <div class="charts-container">
-    <div class='chart'>
-        <canvas id="canvas"></canvas>
-    </div>
-    <div class='chart'>
-        <canvas #chartCanvas></canvas>
-    </div>
-  </div>
-
 </div>

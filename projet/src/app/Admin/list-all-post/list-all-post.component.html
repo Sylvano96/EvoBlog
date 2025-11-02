@@ -1,125 +1,262 @@
-<app-nav-bar-admin></app-nav-bar-admin>
+<!-- admin-posts-list.component.html -->
+<div class="admin-page">
+  <app-nav-bar-admin></app-nav-bar-admin>
 
-<div class="admin-post-container">
-    <div class="header-top">
-        <h2>📌 Liste des posts publiés</h2>
-        <p class="count-text">Total : {{numTotal}}</p>
+  <div class="admin-container">
+    
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="header-content">
+        <h1 class="page-title">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+          Liste des Posts
+        </h1>
+        <p class="page-subtitle">Tous les articles publiés et en attente</p>
+      </div>
+      <div class="header-stats">
+        <div class="stat-badge">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+          </svg>
+          <span>{{numTotal}} posts</span>
+        </div>
+      </div>
     </div>
 
-    <!-- Loading -->
-    <app-spinner *ngIf="isLoading"></app-spinner>
-
-    <!-- No data -->
-    <div *ngIf="!isLoading && data.length == 0">
-        <app-not-found value="Aucun post trouvé"></app-not-found>
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="loading-state">
+      <app-spinner></app-spinner>
     </div>
 
-    <!-- Liste des posts -->
+    <!-- Empty State -->
+    <div *ngIf="!isLoading && data.length == 0" class="empty-state">
+      <div class="empty-icon">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+        </svg>
+      </div>
+      <h3>Aucun post trouvé</h3>
+      <p>La liste des posts est actuellement vide</p>
+    </div>
+
+    <!-- Posts Grid -->
     <div *ngIf="!isLoading && data.length != 0" class="posts-grid">
+      
+      <div class="post-card" *ngFor="let item of data; let i = index" [style.animation-delay]="i * 0.05 + 's'">
         
-        <div class="card-post" *ngFor="let item of data">
-            <div class="img-area">
-                <img [src]="'http://localhost:8080/images/'+item.image" alt="{{item.title}}">
-            </div>
+        <!-- Post Image -->
+        <div class="post-image">
+          <img [src]="'http://localhost:8080/images/'+item.image" [alt]="item.title">
+          <div class="status-badge" [class.published]="item.status === 'publié'" [class.unpublished]="item.status === 'non publié'">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <circle cx="12" cy="12" r="10"/>
+            </svg>
+            {{item.status}}
+          </div>
+        </div>
 
-            <h5 class="post-title">{{item.title}}</h5>
+        <!-- Post Content -->
+        <div class="post-content">
+          <h3 class="post-title">{{item.title}}</h3>
 
-            <!-- Accordéon -->
-            <div class="accordion my-3" id="accordion{{item.id}}">
-                <div class="accordion-item" *ngFor="let x of item.contents">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed"
-                                type="button"
-                                data-bs-toggle="collapse"
-                                [attr.data-bs-target]="'#collapse'+x.id"
-                                aria-expanded="false"
-                                [attr.aria-controls]="'collapse'+x.id">
-                            {{x.titlePara}}
-                        </button>
-                    </h2>
-                    <div [id]="'collapse'+x.id" class="accordion-collapse collapse"
-                         [attr.data-bs-parent]="'#accordion'+item.id">
-                        <div class="accordion-body">
-                            <p class="content-para">{{x.content}}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Infos -->
-            <div class="post-info">
-                <small>Date : {{item.createdAt | date:'dd/MM/yyyy HH:mm'}}</small><br>
-                <small>Status : {{item.status}}</small><br>
-                <ng-container *ngFor="let u of dataUser">
-                    <small *ngIf="u.id == item.userId">
-                        {{item.status == "publié" ? "Publié" : "Créé"}} par : {{u.name + " " + u.lastName}}
-                    </small>
-                </ng-container>
-            </div>
-
-            <!-- Boutons -->
-            <div class="post-actions">
-                <button class="btn btn-danger"
-                        (click)="toogleValide(item.id)">
-                    <i class="fas fa-trash-alt"></i> Supprimer
+          <!-- Accordion -->
+          <div class="custom-accordion" [id]="'accordion' + item.id">
+            <div class="accordion-item" *ngFor="let x of item.contents">
+              <h2 class="accordion-header">
+                <button 
+                  class="accordion-btn collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  [attr.data-bs-target]="'#collapse' + x.id"
+                  aria-expanded="false"
+                  [attr.aria-controls]="'collapse' + x.id"
+                >
+                  <span>{{x.titlePara}}</span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"/>
+                  </svg>
                 </button>
-
-                <button class="btn btn-primary"
-                        *ngIf="item.status != 'non publié'"
-                        data-bs-toggle="modal"
-                        data-bs-target="#exampleModal"
-                        (click)="getCommentsPost(item.id)">
-                    <i class="fas fa-comments"></i> Commentaires
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Validation Suppression -->
-<div *ngIf="valide" class="cont-del">
-    <div class="del-box">
-        <h4>Confirmation</h4>
-        <p>Voulez-vous vraiment supprimer ce post ?</p>
-
-        <div class="btn-zone">
-            <button class="btn btn-primary" (click)="deletePost()">Oui</button>
-            <button class="btn btn-secondary mx-2" (click)="toogleValide(0)">Non</button>
-        </div>
-    </div>
-</div>
-
-<!-- Toast Success -->
-<div *ngIf="isDelete" class="alert alert-success toast-success">
-    {{message}} ✔
-</div>
-
-<!-- Modal Commentaires -->
-<div class="modal fade" id="exampleModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content p-3">
-            <h3>💬 Commentaires</h3>
-
-            <!-- Commentaires vide -->
-            <div *ngIf="dataCommentsPost.length == 0" class="comment-empty">
-                Aucun commentaire pour le moment...
-            </div>
-
-            <!-- Commentaires existants -->
-            <div *ngIf="dataCommentsPost.length != 0">
-                <div *ngFor="let item of dataCommentsPost" class="comment-card">
-                    <h6>{{'@' + item.pseudo}}</h6>
-                    <p>{{item.comment}}</p>
-                    <small class="date-comment">{{item.createdAt | date:'dd/MM/yyyy HH:mm'}}</small>
-
-                    <div class="text-end">
-                        <button class="btn btn-danger btn-sm" (click)="deleteComment(item.id)">
-                            Supprimer
-                        </button>
-                    </div>
+              </h2>
+              <div 
+                [id]="'collapse' + x.id" 
+                class="accordion-collapse collapse"
+                [attr.data-bs-parent]="'#accordion' + item.id"
+              >
+                <div class="accordion-content">
+                  <p>{{x.content}}</p>
                 </div>
+              </div>
             </div>
+          </div>
+
+          <!-- Post Meta -->
+          <div class="post-meta">
+            <div class="meta-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+              <span>{{item.createdAt | date:'dd/MM/yyyy HH:mm'}}</span>
+            </div>
+            <div class="meta-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+              <ng-container *ngFor="let u of dataUser">
+                <span *ngIf="u.id == item.userId">{{u.name}} {{u.lastName}}</span>
+              </ng-container>
+            </div>
+            <div class="meta-item" *ngIf="item.category">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
+                <line x1="7" y1="7" x2="7.01" y2="7"/>
+              </svg>
+              <span>{{item.category}}</span>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="post-actions">
+            <button class="action-btn delete-btn" (click)="toogleValide(item.id)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3 6 5 6 21 6"/>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+              </svg>
+              Supprimer
+            </button>
+            <button 
+              class="action-btn comments-btn" 
+              *ngIf="item.status !== 'non publié'"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              (click)="getCommentsPost(item.id)"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+              Commentaires
+            </button>
+          </div>
 
         </div>
+
+      </div>
+
     </div>
+
+  </div>
+
+  <!-- Delete Modal -->
+  <div *ngIf="valide" class="modal-overlay" (click)="toogleValide(0)">
+    <div class="delete-modal" (click)="$event.stopPropagation()">
+      
+      <div class="modal-header">
+        <div class="modal-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+        </div>
+        <button class="close-btn" (click)="toogleValide(0)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <h3>Supprimer ce post ?</h3>
+        <p>Cette action est irréversible. Le post sera définitivement supprimé.</p>
+        <p class="confirmation-text">Voulez-vous vraiment continuer ?</p>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-cancel" (click)="toogleValide(0)">Annuler</button>
+        <button class="btn-delete" (click)="deletePost()">Supprimer</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Comments Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content custom-modal">
+
+        <div class="modal-header">
+          <div class="modal-title-wrapper">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            <h5 class="modal-title">Commentaires</h5>
+          </div>
+          <button type="button" class="btn-close-custom" data-bs-dismiss="modal">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"/>
+              <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          
+          <!-- Empty Comments -->
+          <div *ngIf="dataCommentsPost.length == 0" class="comments-empty">
+            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            <p>Aucun commentaire pour le moment</p>
+          </div>
+
+          <!-- Comments List -->
+          <div *ngIf="dataCommentsPost.length != 0" class="comments-list">
+            <div *ngFor="let item of dataCommentsPost" class="comment-item">
+              <div class="comment-header">
+                <div class="comment-avatar">
+                  {{item.pseudo.charAt(0).toUpperCase()}}
+                </div>
+                <div class="comment-info">
+                  <h6>{{"@ "+item.pseudo}}</h6>
+                  <span class="comment-date">{{item.createdAt | date:'dd/MM/yyyy HH:mm'}}</span>
+                </div>
+              </div>
+              <p class="comment-text">{{item.comment}}</p>
+              <button class="delete-comment-btn" (click)="deleteComment(item.id)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="3 6 5 6 21 6"/>
+                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                </svg>
+                Supprimer
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Toast -->
+  <div *ngIf="isDelete" class="success-toast">
+    <div class="toast-content">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+        <polyline points="22 4 12 14.01 9 11.01"/>
+      </svg>
+      <span>{{message}}</span>
+    </div>
+  </div>
+
 </div>

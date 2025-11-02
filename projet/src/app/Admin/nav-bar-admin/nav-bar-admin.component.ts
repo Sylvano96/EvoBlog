@@ -17,6 +17,12 @@ export class NavBarAdminComponent implements OnInit {
       this.userName = this.AuthService.getName();
     }
 
+    isMenuOpen : boolean = false;
+
+    toggleMenu() {
+      this.isMenuOpen = !this.isMenuOpen;
+    }
+
     logOut(){
       this.AuthService.logOut()
       this.router.navigate(["/login"])

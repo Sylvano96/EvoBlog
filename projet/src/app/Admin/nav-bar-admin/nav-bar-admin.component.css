@@ -1,90 +1,276 @@
-.custom-navbar {
-  background: #ffffff !important;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-  padding: 12px 18px;
-  transition: 0.3s ease;
+/* admin-nav.component.css */
+.admin-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Marque */
-.navbar-brand {
-  font-size: 22px;
-  font-weight: 700;
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0.75rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Brand avec badge admin */
+.brand {
+  font-size: 1.5rem;
+  font-weight: 800;
   cursor: pointer;
-  color: #2E7D32 !important;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: transform 0.3s ease;
 }
 
-/* ADMIN badge */
+.brand:hover {
+  transform: scale(1.02);
+}
+
+.brand-text {
+  color: #60a5fa;
+  letter-spacing: -0.5px;
+}
+
+.brand-accent {
+  background: linear-gradient(135deg, #60a5fa 0%, #93c5fd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .admin-badge {
-  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
   color: white;
-  background-color: #2E7D32;
-  padding: 3px 6px;
-  margin-left: 6px;
-  border-radius: 6px;
+  font-size: 0.7rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 50px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
 }
 
-/* Menu Links */
-.nav-link {
+/* Menu Toggle */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 1001;
+}
+
+.menu-toggle span {
+  width: 25px;
+  height: 2px;
+  background: #60a5fa;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(7px, 7px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Navigation Menu */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   background: transparent;
   border: none;
-  color: #374151 !important;
-  font-size: 17px;
-  padding: 10px 15px;
-  border-radius: 6px;
-  transition: 0.25s ease-in-out;
+  color: #cbd5e1;
+  padding: 0.65rem 1.15rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.nav-link:hover,
-.nav-link.active {
-  color: #1565C0 !important;
-  background-color: rgba(21, 101, 192, 0.08);
+.nav-btn svg {
+  transition: transform 0.3s ease;
 }
 
-/* Profil admin */
+.nav-btn:hover {
+  background: rgba(96, 165, 250, 0.15);
+  color: #60a5fa;
+}
+
+.nav-btn:hover svg {
+  transform: scale(1.1);
+}
+
+/* Actions (Admin Info + Logout) */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .admin-info {
   display: flex;
   align-items: center;
-  margin-right: 14px;
-  padding: 8px 12px;
-  background: rgba(46,125,50,0.08);
-  border-radius: 12px;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem;
+  background: rgba(96, 165, 250, 0.1);
+  border-radius: 50px;
+  border: 2px solid rgba(96, 165, 250, 0.2);
 }
 
-.avatar-icon {
-  font-size: 20px;
-  color: #2E7D32;
-  margin-right: 6px;
+.admin-avatar {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
 }
 
 .admin-name {
   font-weight: 600;
-  color: #2E7D32;
+  font-size: 0.9rem;
+  color: #f1f5f9;
 }
 
-/* Déconnexion button */
 .logout-btn {
-  background-color: #D32F2F;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+  border: none;
   color: white;
-  font-size: 15px;
-  padding: 8px 14px;
+  padding: 0.65rem 1.25rem;
   border-radius: 10px;
-  transition: 0.3s !important;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
 }
 
 .logout-btn:hover {
-  background-color: #b71c1c;
-  transform: scale(1.05);
+  background: linear-gradient(135deg, #b91c1c 0%, #dc2626 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(220, 38, 38, 0.4);
 }
 
-/* Mobile */
-@media (max-width: 768px) {
+.logout-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.logout-btn:hover svg {
+  transform: translateX(3px);
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 320px;
+    height: 100vh;
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 6rem 2rem 2rem;
+    gap: 2rem;
+    transition: right 0.4s ease;
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .nav-menu.active {
+    right: 0;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  .nav-btn {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 1rem 1.25rem;
+  }
+
+  .nav-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+
   .admin-info {
-    margin: 12px 0;
     width: 100%;
     justify-content: center;
+    padding: 0.75rem 1rem;
   }
+
   .logout-btn {
     width: 100%;
-    margin-top: 8px;
+    justify-content: center;
+    padding: 0.875rem 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-container {
+    padding: 0.75rem 1.5rem;
+  }
+
+  .brand {
+    font-size: 1.35rem;
+  }
+
+  .admin-badge {
+    font-size: 0.65rem;
+    padding: 0.3rem 0.65rem;
+  }
+
+  .nav-menu {
+    width: 280px;
   }
 }

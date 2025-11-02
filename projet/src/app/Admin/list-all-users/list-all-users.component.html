@@ -1,75 +1,222 @@
-<app-nav-bar-admin></app-nav-bar-admin>
+<!-- admin-authors-list.component.html -->
+<div class="admin-page">
+  <app-nav-bar-admin></app-nav-bar-admin>
 
-<div class="container my-4">
-  <h3 class="page-title">LISTE DES AUTEURS</h3>
+  <div class="admin-container">
+    
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="header-content">
+        <h1 class="page-title">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          Liste des Auteurs
+        </h1>
+        <p class="page-subtitle">Gérez tous les auteurs de la plateforme</p>
+      </div>
+      <div class="header-stats">
+        <div class="stat-badge">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          <span>{{data.length}} auteurs</span>
+        </div>
+      </div>
+    </div>
 
-  <!-- TABLE LIST -->
-  <div *ngIf="data.length != 0">
-    <div class="table-responsive shadow rounded-3">
-      <table class="table table-hover align-middle">
-        <thead class="thead-custom">
-          <tr>
-            <th>NOM</th>
-            <th>PRENOMS</th>
-            <th>EMAIL</th>
-            <th>NOMBRE DE POSTS</th>
-            <th>DERNIER POST</th>
-            <th>ACTIONS</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let data of data">
-            <td>{{data[1]}}</td>
-            <td>{{data[2]}}</td>
-            <td>{{data[3]}}</td>
-            <td><span class="badge bg-primary">{{data[4]}}</span></td>
-            <td>{{data[5] | date : 'HH:mm:ss - dd/MM/yyyy'}}</td>
-            <td>
-              <button class="btn btn-outline-primary btn-sm" *ngIf="data[4] != 0" (click)="onClick(data[0])">
-                Voir <i class="fas fa-eye"></i>
-              </button>
-              <button class="btn btn-outline-danger btn-sm mx-1" (click)="toogleValide(data[0])">
-                Supprimer <i class="fas fa-trash"></i>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- Table Content -->
+    <div *ngIf="data.length != 0 && !isLoading" class="table-section">
+      <div class="table-card">
+        <div class="table-responsive">
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th>
+                  <div class="th-content">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                      <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    Nom
+                  </div>
+                </th>
+                <th>
+                  <div class="th-content">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                      <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    Prénoms
+                  </div>
+                </th>
+                <th>
+                  <div class="th-content">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                      <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                    Email
+                  </div>
+                </th>
+                <th>
+                  <div class="th-content">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                      <polyline points="14 2 14 8 20 8"/>
+                    </svg>
+                    Posts
+                  </div>
+                </th>
+                <th>
+                  <div class="th-content">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"/>
+                      <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                    Dernier Post
+                  </div>
+                </th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let author of data; let i = index" [style.animation-delay]="i * 0.05 + 's'">
+                <td>
+                  <div class="user-cell">
+                    <div class="user-avatar">{{author[1].charAt(0)}}</div>
+                    <span class="user-name">{{author[1]}}</span>
+                  </div>
+                </td>
+                <td>{{author[2]}}</td>
+                <td>
+                  <span class="email-text">{{author[3]}}</span>
+                </td>
+                <td>
+                  <span class="posts-badge">{{author[4]}}</span>
+                </td>
+                <td>
+                  <span class="date-text">{{author[5] | date : 'dd/MM/yyyy HH:mm'}}</span>
+                </td>
+                <td>
+                  <div class="action-buttons">
+                    <button 
+                      class="action-btn view-btn" 
+                      *ngIf="author[4] != 0" 
+                      (click)="onClick(author[0])"
+                      title="Voir les posts"
+                    >
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                      </svg>
+                    </button>
+                    <button 
+                      class="action-btn delete-btn" 
+                      (click)="toogleValide(author[0])"
+                      title="Supprimer l'auteur"
+                    >
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6"/>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                        <line x1="10" y1="11" x2="10" y2="17"/>
+                        <line x1="14" y1="11" x2="14" y2="17"/>
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="data.length == 0 && !isLoading" class="empty-state">
+      <div class="empty-icon">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+      </div>
+      <h3>Aucun auteur trouvé</h3>
+      <p>La liste des auteurs est actuellement vide</p>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="loading-state">
+      <app-spinner></app-spinner>
+    </div>
+
+  </div>
+
+  <!-- Delete Modal -->
+  <div *ngIf="valide" class="modal-overlay" (click)="toogleValide(0)">
+    <div class="delete-modal" (click)="$event.stopPropagation()">
+      
+      <div class="modal-header">
+        <div class="modal-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+        </div>
+        <button class="close-btn" (click)="toogleValide(0)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <h3>Supprimer cet auteur ?</h3>
+        <p>
+          ⚠️ Cette action est irréversible. Si vous supprimez cet auteur, 
+          <strong>tous ses posts seront également supprimés</strong>.
+        </p>
+        <p class="confirmation-text">Voulez-vous vraiment continuer ?</p>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-cancel" (click)="toogleValide(0)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+          Annuler
+        </button>
+        <button class="btn-delete" (click)="deleteUser()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="3 6 5 6 21 6"/>
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+          </svg>
+          Supprimer
+        </button>
+      </div>
+
     </div>
   </div>
 
-  <!-- NO DATA -->
-  <div *ngIf="data.length == 0 && !isLoading">
-    <app-not-found value="Auteurs"></app-not-found>
-  </div>
-
-  <!-- LOADING -->
-  <div *ngIf="isLoading" class="mt-4">
-    <app-spinner></app-spinner>
-  </div>
-</div>
-
-<!-- DELETE MODAL -->
-<div *ngIf="valide" class="cont-del">
-  <div class="delete-box shadow-lg">
-    <div class="delete-header d-flex justify-content-between align-items-center">
-      <h5 class="fw-bold mb-0">Suppression d'Auteur</h5>
-      <button type="button" class="btn-close" (click)="toogleValide(0)"></button>
-    </div>
-
-    <p class="delete-text">
-      Si vous supprimez cet auteur, tous ses posts seront supprimés ❌.<br>
-      Voulez-vous vraiment continuer ?
-    </p>
-
-    <div class="text-end px-3 pb-3">
-      <button class="btn btn-danger me-2" (click)="deleteUser()">Oui</button>
-      <button class="btn btn-secondary" (click)="toogleValide(0)">Non</button>
+  <!-- Success Toast -->
+  <div *ngIf="isDelete" class="success-toast">
+    <div class="toast-content">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+        <polyline points="22 4 12 14.01 9 11.01"/>
+      </svg>
+      <span>Auteur supprimé avec succès</span>
     </div>
   </div>
-</div>
 
-<!-- ALERT -->
-<div *ngIf="isDelete" class="alert alert-success delete-alert text-center">
-  Auteur supprimé <i class="fas fa-check"></i>
 </div>
