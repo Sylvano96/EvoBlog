@@ -27,4 +27,7 @@ public class Users {
 
     private boolean actif = false;
 
+    // Les getters et setters générés par Lombok suffisent
+    // Supprime les méthodes manuelles ci-dessous !
+
 }

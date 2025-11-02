@@ -14,23 +14,31 @@ import com.example.SpringBoot.Interfaces.MyIntreface;
 public class LoginService {
 
     @Autowired
-    private MyIntreface myIntreface;
+    private MyIntreface myInterface;
 
-    public String[] login(Login users){
+    public String[] login(Login users) {
 
-        Optional <Users> user = myIntreface.loginUserOptional(users.getEmail(), users.getPassword());
+        Optional<Users> user = myInterface.loginUserOptional(users.getEmail(), users.getPassword());
 
-        if(user.isPresent()){
-            String[] data = {
-                "evo-blog-pl-" + user.get().getId(),
-                String.valueOf(user.get().getStatus()),
-                user.get().getName() + " " + user.get().getLastName()
-            };
-            
-            return data;
+        // Vérifie d'abord si l'utilisateur existe
+        if (!user.isPresent()) {
+            throw new IllegalStateException("Utilisateur non trouvé");
         }
 
-        throw new IllegalStateException("Utilisateur non trouvé");
+        // Ensuite vérifie s'il est actif
+        if (!user.get().isActif()) {
+            throw new IllegalStateException("Utilisateur inactif");
+        }
+
+        // Récupère les données de l'utilisateur
+        Users foundUser = user.get();
+        String[] data = {
+            "evo-blog-pl-" + foundUser.getId(),
+            String.valueOf(foundUser.getStatus()),
+            foundUser.getName() + " " + foundUser.getLastName()
+        };
+
+        return data;
     }
 
 }
